@@ -5,16 +5,7 @@ import java.awt.event.ActionListener;
 public class HELLO extends JFrame{
    private JPanel panelPrincipal;
     private JTabbedPane tabbedPane1;
-    private JTextField txtCodigo;
-    private JTextField txtNombre;
-    private JTextField txtUnidad;
-    private JButton guardarButton;
-    private JButton limpiarButton;
-    private JButton borrarButton;
-    private JTextField txtBuscarPorNombre;
-    private JButton reporteButton;
-    private JButton buscarButton;
-    private JTable Listado;
+    private JButton guardarButtonINS;
     private JTextField txtCodTipoInstrumento;
     private JTextField txtNomTipoIns;
     private JTextField txtBuscarNombreTI;
@@ -25,13 +16,25 @@ public class HELLO extends JFrame{
     private JButton guardarTIButton;
     private JButton limpiarButtonTI;
     private JButton borrarButtonTI;
+    private JTextField txtSerieINS;
+    private JTextField txtMinimoINS;
+    private JTextField txtToleranciaINS;
+    private JTextField txtDescripcionINS;
+    private JTextField txtMaximoINS;
+    private JComboBox comboBoxTipoINS;
+    private JButton limpiarButtonINS;
+    private JButton borrarButtonINS;
+    private JTextField txtBusquedaDescripcionINS;
+    private JButton buscarButtonINS;
+    private JButton reporteButtonINS;
+    private JTable table1;
 
 
     public HELLO(){
-        guardarButton.addActionListener(new ActionListener() {
+        guardarButtonINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(guardarButton, "Guardado");
+                JOptionPane.showMessageDialog(guardarButtonINS, "Guardado");
             }
         });
     }
