@@ -17,14 +17,14 @@ public class HELLO extends JFrame{
     private JTable Listado;
     private JTextField txtCodTipoInstrumento;
     private JTextField txtNomTipoIns;
-    private JTextField txtUnidadTipIns;
-    private JButton guardarTI;
-    private JButton limpiarTI;
-    private JButton borrarTI;
     private JTextField txtBuscarNombreTI;
     private JButton reporteTIButton;
     private JButton buscarTIButton;
     private JTable ListadoTipInst;
+    private JTextField txtUnidTipInst;
+    private JButton guardarTIButton;
+    private JButton limpiarButtonTI;
+    private JButton borrarButtonTI;
 
 
     public HELLO(){
