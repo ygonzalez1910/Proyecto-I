@@ -28,6 +28,19 @@ public class HELLO extends JFrame{
     private JButton buscarButtonINS;
     private JButton reporteButtonINS;
     private JTable table1;
+    private JPanel Calibraciones;
+    private JTable table2;
+    private JScrollPane tablaCalibraciones;
+    private JButton guardarButton;
+    private JButton borrarButton;
+    private JButton limpiarButton;
+    private JButton buscarButton;
+    private JButton reporteButton;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JLabel infoCalib;
 
 
     public HELLO(){
@@ -50,5 +63,8 @@ public class HELLO extends JFrame{
         hi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
