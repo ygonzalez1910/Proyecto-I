@@ -3,46 +3,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HELLO extends JFrame{
-    private JPanel panelPrincipal;
-    private JTextField txtSerie, txtDescripcion, txtMaximo, txtMinimo, txtTolerancia, txtDescBusqueda;
-    private JButton btnGuardar,btnLimpiar,btnBorrar,btnReporte,btnBuscar;
-    private JComboBox comboBoxTIPO;
-    private JTable table;
-    private JMenuBar menuPrincipal;
-    private JMenu tipoInstrumento, instrumento, calibraciones;
+   private JPanel panelPrincipal;
+    private JTabbedPane tabbedPane1;
+    private JTextField txtCodigo;
+    private JTextField txtNombre;
+    private JTextField txtUnidad;
+    private JButton guardarButton;
+    private JButton limpiarButton;
+    private JButton borrarButton;
+    private JTextField txtBuscarPorNombre;
+    private JButton reporteButton;
+    private JButton buscarButton;
+    private JTable Listado;
+
 
     public HELLO(){
-        btnGuardar.addActionListener(new ActionListener() {
+        guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(btnGuardar, "Guardado");
+                JOptionPane.showMessageDialog(guardarButton, "Guardado");
             }
         });
-        btnLimpiar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(btnLimpiar, "Limpiado");
-            }
-        });
-        btnBorrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(btnBorrar, "Borrado");
-            }
-        });
-        btnReporte.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(btnReporte, "Reporte...");
-            }
-        });
-        btnBuscar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(btnBuscar, "Buscando...");
-            }
-        });
-        ajustarMenus();
     }
 
     public static void main(String[] args) {
@@ -55,12 +36,6 @@ public class HELLO extends JFrame{
         hi.setVisible(true);
         hi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    private void ajustarMenus(){
-        menuPrincipal = new JMenuBar();
-        menuPrincipal.add(tipoInstrumento=new JMenu("Tipos de intrumentos"));
-        menuPrincipal.add(instrumento =new JMenu("Intrumentos"));
-        menuPrincipal.add(calibraciones=new JMenu("Calibraciones"));
-        setJMenuBar(menuPrincipal);
-    }
 
+    
 }
