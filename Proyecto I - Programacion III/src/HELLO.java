@@ -6,10 +6,6 @@ public class HELLO extends JFrame{
    private JPanel panelPrincipal;
     private JTabbedPane tabbedPane1;
     private JButton guardarButtonINS;
-    private JTextField txtBuscarNombreTI;
-    private JButton reporteTIButton;
-    private JButton buscarTIButton;
-    private JTable ListadoTipInst;
     private JTextField txtSerieINS;
     private JTextField txtMinimoINS;
     private JTextField txtToleranciaINS;
@@ -38,6 +34,7 @@ public class HELLO extends JFrame{
     private JButton button1;
     private JButton button2;
     private JButton button3;
+    private JTable table3;
 
 
     public HELLO(){
