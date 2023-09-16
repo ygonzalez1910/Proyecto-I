@@ -34,7 +34,7 @@ public class HELLO extends JFrame{
     private JTextField textField3;
     private JTextField textField4;
     private JLabel infoCalib;
-    private JButton reporteButton;
+    ImageIcon icon = new ImageIcon("C:\\Users\\ypgon\\Desktop\\Proyecto I - Progra III\\Proyecto I\\Proyecto I - Programacion III\\src\\Imagenes\\pdf-icon-png-pdf-zum-download-2.png"); // Reemplaza con la ruta de tu imagen
     private JButton guardarButton1;
     private JButton borrarButton1;
     private JButton limpiarButton1;
@@ -43,12 +43,14 @@ public class HELLO extends JFrame{
     private JTextField nombre;
     private JTable tablaTiposInstruemento;
     private JButton buscar;
-    private JButton reporte;
+    private JButton reporteButton;
+    private JButton reporte = new JButton("Reporte",icon);
     private JTable tablaTiposInstrumento;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ModeloTablaTipoInstrumentos modeloTablaTipoInstrumentos;
     private JTextField txtReferencia;
     public TiposInstrumento tiposInstrumento;
+
 
 
     public HELLO(){
@@ -118,7 +120,7 @@ public class HELLO extends JFrame{
                     }
                     d.appendChild(r);
 
-                    UtilidadesXML.guardarArchivoXML(d, "clientes.xml");
+                    UtilidadesXML.guardarArchivoXML(d, "tipos de instrumento.xml");
                     JOptionPane.showMessageDialog(null,"Archivo XML generado exitosamente.");
                 } catch (ParserConfigurationException ex) {
                     JOptionPane.showMessageDialog(null,"Error en el archivo XML");
