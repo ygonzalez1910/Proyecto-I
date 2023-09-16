@@ -1,4 +1,9 @@
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
 public class TiposInstrumento {
+
+
     public TiposInstrumento(String codigo, String nombre, String unidad) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -16,6 +21,19 @@ public class TiposInstrumento {
                 ", nombre='" + nombre + '\'' +
                 ", unidad='" + unidad + '\'' +
                 '}';
+    }
+    public String getNodeName() {
+        return DESCRIPCION_XML;
+    }
+
+    public Node toXML(Document doc) {
+        //Aquí se le da el nombre de la etiqueta
+        Node r = doc.createElement(getNodeName());
+        r.appendChild(UtilidadesXML.crearNodo(doc, "codigo", codigo));
+        r.appendChild(UtilidadesXML.crearNodo(doc, "nombre", nombre));
+        r.appendChild(UtilidadesXML.crearNodo(doc, "unidad", unidad));
+
+        return r;
     }
     public Object[] toArray() {
         Object[] r = new Object[5];
@@ -40,4 +58,5 @@ public class TiposInstrumento {
     private String unidad;
 
     private static final String[] NOMBRE_CAMPOS = {"Código", "Nombre", "Unidad" };
+    public static final String DESCRIPCION_XML = "TIPOS DE INSTRUMENTO";
 }

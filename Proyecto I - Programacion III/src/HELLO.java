@@ -1,4 +1,8 @@
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,17 +35,94 @@ public class HELLO extends JFrame{
     private JTextField textField4;
     private JLabel infoCalib;
     private JButton reporteButton;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JTable table3;
+    private JButton guardarButton1;
+    private JButton borrarButton1;
+    private JButton limpiarButton1;
+    private JTextField unidad;
+    private JTextField codigo;
+    private JTextField nombre;
+    private JTable tablaTiposInstruemento;
+    private JButton buscar;
+    private JButton reporte;
+    private JTable tablaTiposInstrumento;
+    private ConjuntoTiposInstrumento cjntTiposInsrumentos;
+    private ModeloTablaTipoInstrumentos modeloTablaTipoInstrumentos;
+    private JTextField txtReferencia;
+    public TiposInstrumento tiposInstrumento;
 
 
     public HELLO(){
+        tablaTiposInstrumento = new JTable();
+        cjntTiposInsrumentos = new ConjuntoTiposInstrumento();
+        modeloTablaTipoInstrumentos = new ModeloTablaTipoInstrumentos(cjntTiposInsrumentos);
+        tablaTiposInstrumento.setModel(modeloTablaTipoInstrumentos);
+
         guardarButtonINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(guardarButtonINS, "Guardado");
+            }
+        });
+        guardarButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String txtCodigo = codigo.getText();
+                String txtNombre = nombre.getText();
+                String txtUnidad = unidad.getText();
+                tiposInstrumento = new TiposInstrumento(txtCodigo,txtNombre,txtUnidad);
+                cjntTiposInsrumentos.agregar(tiposInstrumento);
+                modeloTablaTipoInstrumentos.fireTableDataChanged();
+                JOptionPane.showMessageDialog(null, "Tipo de instruneto agregado existosamente");
+
+            }
+        });
+        limpiarButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                codigo.setText("");
+                unidad.setText("");
+                nombre.setText("");
+            }
+        });
+        borrarButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String referenciaCodigo = codigo.getText();
+                String referenciaNombre = nombre.getText();
+                String referenciaUnidad = unidad.getText();
+                cjntTiposInsrumentos.borrar(referenciaCodigo,referenciaNombre,referenciaUnidad);
+                modeloTablaTipoInstrumentos.fireTableDataChanged();
+                JOptionPane.showMessageDialog(null,"Tipo de instrumento eliminado exitosamente.");
+            }
+        });
+        buscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String referencNombre = nombre.getText();
+                JOptionPane.showMessageDialog(panelPrincipal,cjntTiposInsrumentos.buscar(referencNombre));
+            }
+        });
+        reporte.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Document d;
+                try {
+                    d = UtilidadesXML.crearDocumento();
+                    Node r = d.createElement("DatosClientes");
+
+                    int numero = cjntTiposInsrumentos.numTipoInstrumento();
+                    int i = 0;
+                    while(i <numero){
+                        r.appendChild(cjntTiposInsrumentos.recuperar(i).toXML(d));
+                        i++;
+                    }
+                    d.appendChild(r);
+
+                    UtilidadesXML.guardarArchivoXML(d, "clientes.xml");
+                    JOptionPane.showMessageDialog(null,"Archivo XML generado exitosamente.");
+                } catch (ParserConfigurationException ex) {
+                    JOptionPane.showMessageDialog(null,"Error en el archivo XML");
+                }
             }
         });
     }
