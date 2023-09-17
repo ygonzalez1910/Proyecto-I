@@ -23,8 +23,6 @@ public class HELLO extends JFrame{
     private JButton reporteButtonINS;
     private JTable table1;
     private JPanel Calibraciones;
-    private JTable table2;
-    private JScrollPane tablaCalibraciones;
     private JButton guardarButton;
     private JButton borrarButton;
     private JButton limpiarButton;
@@ -45,6 +43,7 @@ public class HELLO extends JFrame{
     private JButton buscar;
     private JButton reporteButton;
     private JButton reporte = new JButton("Reporte",icon);
+    private JTable table2;
     private JTable tablaTiposInstrumento;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ModeloTablaTipoInstrumentos modeloTablaTipoInstrumentos;
