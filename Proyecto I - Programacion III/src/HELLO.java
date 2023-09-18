@@ -2,6 +2,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,16 +45,29 @@ public class HELLO extends JFrame{
     private JButton reporteButton;
     private JButton reporte = new JButton("Reporte",icon);
     private JTable table2;
-    private JTable tablaTiposInstrumento;
+
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ModeloTablaTipoInstrumentos modeloTablaTipoInstrumentos;
     private JTextField txtReferencia;
     public TiposInstrumento tiposInstrumento;
 
+    public void refrescarTabla() {
+        tablaTiposInstruemento.setModel(model);
+    }
 
+    DefaultTableModel model = new DefaultTableModel();
 
+    private void setImageLabel(JLabel labelName, String root){
+        ImagenIcon image = new ImageIcon(root);
+        
+    }
     public HELLO(){
-        tablaTiposInstrumento = new JTable();
+
+        JTable tablaTiposInstrumento = new JTable();
+        model.addColumn("Codigo");
+        model.addColumn("Nombre");
+        model.addColumn("Unidad");
+        refrescarTabla();
         cjntTiposInsrumentos = new ConjuntoTiposInstrumento();
         modeloTablaTipoInstrumentos = new ModeloTablaTipoInstrumentos(cjntTiposInsrumentos);
         tablaTiposInstrumento.setModel(modeloTablaTipoInstrumentos);
@@ -72,8 +86,18 @@ public class HELLO extends JFrame{
                 String txtUnidad = unidad.getText();
                 tiposInstrumento = new TiposInstrumento(txtCodigo,txtNombre,txtUnidad);
                 cjntTiposInsrumentos.agregar(tiposInstrumento);
+                model.setRowCount(0);
+                for(int i = 0; i < cjntTiposInsrumentos.numTipoInstrumento();i++){
+                    Object [] fila={
+                            cjntTiposInsrumentos.recuperar(i).getCodigo(),
+                            cjntTiposInsrumentos.recuperar(i).getNombre(),
+                            cjntTiposInsrumentos.recuperar(i).getUnidad()
+
+                    };
+                    model.addRow(fila);
+                }
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
-                JOptionPane.showMessageDialog(null, "Tipo de instruneto agregado existosamente");
+                JOptionPane.showMessageDialog(null, "Tipo de instrumento agregado existosamente");
 
             }
         });
@@ -83,6 +107,7 @@ public class HELLO extends JFrame{
                 codigo.setText("");
                 unidad.setText("");
                 nombre.setText("");
+                modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
         });
         borrarButton1.addActionListener(new ActionListener() {
@@ -92,6 +117,18 @@ public class HELLO extends JFrame{
                 String referenciaNombre = nombre.getText();
                 String referenciaUnidad = unidad.getText();
                 cjntTiposInsrumentos.borrar(referenciaCodigo,referenciaNombre,referenciaUnidad);
+                for(int i = 0; i < cjntTiposInsrumentos.numTipoInstrumento();i++){
+                    if(tiposInstrumento.getNombre() == referenciaNombre && tiposInstrumento.getCodigo() == referenciaCodigo
+                        && tiposInstrumento.getUnidad() == referenciaUnidad){
+                        Object [] fila={
+                                cjntTiposInsrumentos.recuperar(i).getCodigo(),
+                                cjntTiposInsrumentos.recuperar(i).getNombre(),
+                                cjntTiposInsrumentos.recuperar(i).getUnidad()
+
+                        };
+                    }
+
+                }
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
                 JOptionPane.showMessageDialog(null,"Tipo de instrumento eliminado exitosamente.");
             }
@@ -126,6 +163,7 @@ public class HELLO extends JFrame{
                 }
             }
         });
+
     }
 
     public static void main(String[] args) {
