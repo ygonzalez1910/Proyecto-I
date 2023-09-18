@@ -22,13 +22,19 @@ public class ConjuntoInstrumentos {
         }
         return "El instrumento no fue encontrado";
     }
-    public void borrar(String serie, String descripcion,int minimo, int maximo, int tolerancia, String tipo){
-        for(int i = 0; i < instrumentos.size(); i++){
-            if(instrumentos.get(i).getSerie().equals(serie) && instrumentos.get(i).getDescripcion().equals(descripcion) && instrumentos.get(i).getMinimo().equals(minimo) &&instrumentos.get(i).getMaximo().equals(maximo) && instrumentos.get(i).getTolerancia().equals(tolerancia) && instrumentos.get(i).getTipo().equals(tipo)  ){
+    public void borrar(String serie, String descripcion, int minimo, int maximo, int tolerancia, String tipo) {
+        for (int i = 0; i < instrumentos.size(); i++) {
+            if (instrumentos.get(i).getSerie().equals(serie) &&
+                    instrumentos.get(i).getDescripcion().equals(descripcion) &&
+                    String.valueOf(instrumentos.get(i).getMinimo()).equals(String.valueOf(minimo)) &&
+                    String.valueOf(instrumentos.get(i).getMaximo()).equals(String.valueOf(maximo)) &&
+                    String.valueOf(instrumentos.get(i).getTolerancia()).equals(String.valueOf(tolerancia)) &&
+                    instrumentos.get(i).getTipo().equals(tipo)) {
                 instrumentos.remove(i);
             }
         }
     }
+
     public void agregar(Instrumento nuevoInstrumento){
         instrumentos.add(nuevoInstrumento);
     }

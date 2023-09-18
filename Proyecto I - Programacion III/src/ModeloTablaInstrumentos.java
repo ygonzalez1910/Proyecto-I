@@ -1,6 +1,7 @@
 import javax.swing.table.AbstractTableModel;
 public class ModeloTablaInstrumentos extends AbstractTableModel {
     private final ConjuntoTiposInstrumento cjInstrumentos;
+
     private Object[][] data = new Object[0][5];
 
     public ModeloTablaInstrumentos(ConjuntoTiposInstrumento cjInstrumentos) {
