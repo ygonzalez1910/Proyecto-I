@@ -57,10 +57,10 @@ public class HELLO extends JFrame{
 
     DefaultTableModel model = new DefaultTableModel();
 
-    private void setImageLabel(JLabel labelName, String root){
-        ImagenIcon image = new ImageIcon(root);
-        
-    }
+    //private void setImageLabel(JLabel labelName, String root){
+      //  ImagenIcon image = new ImageIcon(root);
+        //Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.get))
+        //}
     public HELLO(){
 
         JTable tablaTiposInstrumento = new JTable();
