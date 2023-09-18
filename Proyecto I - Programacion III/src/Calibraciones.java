@@ -1,5 +1,8 @@
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
 public class Calibraciones {
-    public Calibraciones(double numeroCalibracion, double numeroBusqueda, String fecha, int mediciones) {
+    public Calibraciones(double numeroCalibracion, String fecha, int mediciones) {
         this.numeroCalibracion = numeroCalibracion;
         this.numeroBusqueda = numeroBusqueda;
         this.fecha = fecha;
@@ -47,7 +50,22 @@ public class Calibraciones {
     public void setMediciones(int mediciones) {
         this.mediciones = mediciones;
     }
+    public static String[] nombreCampos() {
+        return NOMBRE_CAMPOS;
+    }
+    public String getNodeName() {
+        return DESCRIPCION_XML;
+    }
 
+    public Node toXML(Document doc) {
+        //Aquí se le da el nombre de la etiqueta
+        Node r = doc.createElement(getNodeName());
+        r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de calibraciones", Double.parseDouble(numeroCalibracion));
+        r.appendChild(UtilidadesXML.crearNodo(doc, "Fecha", fecha));
+        r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de mediciones", Integer.parseInt(mediciones));
+
+        return r;
+    }
 public Object[] toArray(){
     Object[] r = new Object[4];
     r[0] = numeroCalibracion;
