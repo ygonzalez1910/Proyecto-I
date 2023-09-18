@@ -60,10 +60,9 @@ public class Calibraciones {
     public Node toXML(Document doc) {
         //Aquí se le da el nombre de la etiqueta
         Node r = doc.createElement(getNodeName());
-        r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de calibraciones", Double.parseDouble(numeroCalibracion));
+        r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de calibraciones", String.valueOf(numeroCalibracion));
         r.appendChild(UtilidadesXML.crearNodo(doc, "Fecha", fecha));
-        r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de mediciones", Integer.parseInt(mediciones));
-
+        r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de mediciones", String.Parse(mediciones));
         return r;
     }
 public Object[] toArray(){
@@ -79,4 +78,5 @@ public Object[] toArray(){
     private double numeroBusqueda;
     private String fecha;
     private int mediciones;
+    public static final String DESCRIPCION_XML = "CALIBRACIONES";
 }
