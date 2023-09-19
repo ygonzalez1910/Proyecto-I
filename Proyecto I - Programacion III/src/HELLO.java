@@ -9,20 +9,20 @@ import java.awt.event.ActionListener;
 
 public class HELLO extends JFrame{
    private JPanel panelPrincipal;
-    private JTabbedPane tabbedPane1;
+    private JTabbedPane tablaInstrumentosINS;
     private JButton guardarButtonINS;
     private JTextField txtSerieINS;
     private JTextField txtMinimoINS;
     private JTextField txtToleranciaINS;
     private JTextField txtDescripcionINS;
     private JTextField txtMaximoINS;
-    private JComboBox comboBoxTipoINS;
+    private JComboBox<String> comboBoxTipoINS;
     private JButton limpiarButtonINS;
     private JButton borrarButtonINS;
     private JTextField txtBusquedaDescripcionINS;
     private JButton buscarButtonINS;
     private JButton reporteButtonINS;
-    private JTable table1;
+    private JTable tableInstrumentos;
     private JPanel Calibraciones;
     private JButton guardarButton;
     private JButton borrarButton;
@@ -57,15 +57,24 @@ public class HELLO extends JFrame{
     public Instrumento instrumentos;
     public Calibraciones calibraciones;
     DefaultTableModel model = new DefaultTableModel();
-    private void initTable(){
-        model = new DefaultTableModel(tiposInstrumento.nombreCampos(),0);
+    DefaultTableModel modelINS = new DefaultTableModel();
+
+    private void initTable() {
+        model = new DefaultTableModel(tiposInstrumento.nombreCampos(), 0);
         tablaTiposInstruemento.setModel(model);
+    }
+
+    private void initTableINS() {
+      modelINS = new DefaultTableModel(instrumentos.nombreInstrumentos(),0);
+      tableInstrumentos.setModel(modelINS);
     }
 
     public void refrescarTabla() {
         tablaTiposInstruemento.setModel(model);
     }
-
+    public void refrescarTablaInstrumentos(){
+        tableInstrumentos.setModel(modelINS);
+    }
     //private void setImageLabel(JLabel labelName, String root){
       //  ImagenIcon image = new ImageIcon(root);
         //Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.get))
@@ -81,15 +90,19 @@ public class HELLO extends JFrame{
         modeloTablaTipoInstrumentos = new ModeloTablaTipoInstrumentos(cjntTiposInsrumentos);
         tablaTiposInstrumento.setModel(modeloTablaTipoInstrumentos);
 
-        //JTable tablaInstrumentos = new JTable();
+        String[] opciones = {"Opción 1", "Opción 2", "Opción 3", "Opción 4"};
+        comboBoxTipoINS = new JComboBox<>(opciones);
+
+        JTable tablaInstrumentosINS = new JTable();
         //model.addColumn("No. Serie");
-        model.addColumn("Descripcion");
-        model.addColumn("Minimo");
-        model.addColumn("Maximo");
-        model.addColumn("Tolerancia");
+        modelINS.addColumn("Descripcion");
+        modelINS.addColumn("Minimo");
+        modelINS.addColumn("Maximo");
+        modelINS.addColumn("Tolerancia");
+        refrescarTablaInstrumentos();
         cjntInstrumentos = new ConjuntoInstrumentos();
         modeloTablaInstrumentos =new ModeloTablaInstrumentos(cjntInstrumentos);
-        //tablaInstrumentos.setModel(modeloTablaTipoInstrumentos);
+        tablaInstrumentosINS.setModel(modeloTablaTipoInstrumentos);
         guardarButtonINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,7 +115,7 @@ public class HELLO extends JFrame{
 
                 Instrumento nuevoInstrumento = new Instrumento(txtSerie, txtDescripcion, txtMinimo, txtMaximo, txtTolerancia, txtTipo);
                 cjntInstrumentos.agregar(nuevoInstrumento);
-                model.setRowCount(0);
+                modelINS.setRowCount(0);
                 for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
                     Object[] fila = {
                             cjntInstrumentos.recuperar(i).getSerie(),
@@ -112,7 +125,7 @@ public class HELLO extends JFrame{
                             cjntInstrumentos.recuperar(i).getTolerancia(),
                             cjntInstrumentos.recuperar(i).getTipo()
                     };
-                    model.addRow(fila);
+                    modelINS.addRow(fila);
                 }
 
                 modeloTablaInstrumentos.fireTableDataChanged();
@@ -379,11 +392,15 @@ public class HELLO extends JFrame{
         hi.setSize(900,400);
 
         hi.initTable();
+        //hi.add(comboBoxTipoINS);
+        hi.initTableINS();
+
 
         hi.setLocationRelativeTo(null);
         hi.setVisible(true);
         hi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

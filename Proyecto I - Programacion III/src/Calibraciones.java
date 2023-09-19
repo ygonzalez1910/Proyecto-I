@@ -62,7 +62,11 @@ public class Calibraciones {
         Node r = doc.createElement(getNodeName());
         r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de calibraciones", String.valueOf(numeroCalibracion)));
         r.appendChild(UtilidadesXML.crearNodo(doc, "Fecha", fecha));
+<<<<<<< refs/remotes/origin/main
         r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de mediciones", String.valueOf(mediciones)));
+=======
+        r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de mediciones", " "+mediciones));
+>>>>>>> JTable INSTRUMENTOS
         return r;
     }
 

@@ -51,7 +51,7 @@ public class Instrumento {
         r.appendChild(UtilidadesXML.crearNodo(doc, "descripcion", descripcion));
         r.appendChild(UtilidadesXML.crearNodo(doc, "minimo", String.valueOf(minimo)));
         r.appendChild(UtilidadesXML.crearNodo(doc, "maximo", String.valueOf(maximo)));
-        r.appendChild(UtilidadesXML.crearNodo(doc, "tolerancia", String.valueOf(descripcion)));
+        r.appendChild(UtilidadesXML.crearNodo(doc, "tolerancia", String.valueOf(tolerancia)));
         r.appendChild(UtilidadesXML.crearNodo(doc, "tipo", tipo));
 
         return r;
@@ -62,8 +62,8 @@ public class Instrumento {
         return DESCRIPCION_XML;
     }
 
-    public static String[] nombreCampos() {
-        return NOMBRE_CAMPOS;
+    public static String[] nombreInstrumentos() {
+        return NOMBRE_INSTRUMENTOS;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class Instrumento {
                 '}';
     }
 
-    private static final String[] NOMBRE_CAMPOS = {"Serie", "Descripcion", "Minimo", "Maximo", "Tolerancia", "Tipo"};
+    private static final String[] NOMBRE_INSTRUMENTOS = {"Serie", "Descripcion", "Minimo", "Maximo", "Tolerancia", "Tipo"};
     private String serie;
     public static final String DESCRIPCION_XML = "INSTRUMENTO";
     private String descripcion;
