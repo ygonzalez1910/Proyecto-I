@@ -16,7 +16,7 @@ public class HELLO extends JFrame{
     private JTextField txtToleranciaINS;
     private JTextField txtDescripcionINS;
     private JTextField txtMaximoINS;
-    private JComboBox<String> comboBoxTipoINS;
+    private JComboBox comboBoxTipoINS;
     private JButton limpiarButtonINS;
     private JButton borrarButtonINS;
     private JTextField txtBusquedaDescripcionINS;
@@ -90,8 +90,8 @@ public class HELLO extends JFrame{
         modeloTablaTipoInstrumentos = new ModeloTablaTipoInstrumentos(cjntTiposInsrumentos);
         tablaTiposInstrumento.setModel(modeloTablaTipoInstrumentos);
 
-        String[] opciones = {"Opción 1", "Opción 2", "Opción 3", "Opción 4"};
-        comboBoxTipoINS = new JComboBox<>(opciones);
+        //String[] opciones = {"Opción 1", "Opción 2", "Opción 3", "Opción 4"};
+       // comboBoxTipoINS = new JComboBox<>(opciones);
 
         JTable tablaInstrumentosINS = new JTable();
         //model.addColumn("No. Serie");
@@ -141,6 +141,7 @@ public class HELLO extends JFrame{
                 String txtCodigo = codigo.getText();
                 String txtNombre = nombre.getText();
                 String txtUnidad = unidad.getText();
+                comboBoxTipoINS.addItem(txtNombre);
                 tiposInstrumento = new TiposInstrumento(txtCodigo,txtNombre,txtUnidad);
                 cjntTiposInsrumentos.agregar(tiposInstrumento);
                 model.setRowCount(0);
@@ -392,7 +393,6 @@ public class HELLO extends JFrame{
         hi.setSize(900,400);
 
         hi.initTable();
-        //hi.add(comboBoxTipoINS);
         hi.initTableINS();
 
 
