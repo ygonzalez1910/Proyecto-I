@@ -68,6 +68,22 @@ public class HELLO extends JFrame{
       modelINS = new DefaultTableModel(instrumentos.nombreInstrumentos(),0);
       tableInstrumentos.setModel(modelINS);
     }
+    private void refrescarInstrumentos(){
+        modelINS.setRowCount(0);
+        for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
+            if (cjntInstrumentos.recuperar(i).getTipo() == comboBoxTipoINS.getSelectedItem()) {
+                Object[] fila = {
+                        cjntInstrumentos.recuperar(i).getSerie(),
+                        cjntInstrumentos.recuperar(i).getDescripcion(),
+                        cjntInstrumentos.recuperar(i).getMinimo(),
+                        cjntInstrumentos.recuperar(i).getMaximo(),
+                        cjntInstrumentos.recuperar(i).getTolerancia(),
+                        cjntInstrumentos.recuperar(i).getTipo()
+                };
+                modelINS.addRow(fila);
+            }
+        }
+    }
 
     public void refrescarTabla() {
         tablaTiposInstruemento.setModel(model);
@@ -111,22 +127,12 @@ public class HELLO extends JFrame{
                 int txtMinimo = Integer.parseInt(txtMinimoINS.getText());
                 int txtMaximo = Integer.parseInt(txtMaximoINS.getText());
                 int txtTolerancia = Integer.parseInt(txtToleranciaINS.getText());
-                String txtTipo = comboBoxTipoINS.getName();
+                String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
 
                 Instrumento nuevoInstrumento = new Instrumento(txtSerie, txtDescripcion, txtMinimo, txtMaximo, txtTolerancia, txtTipo);
                 cjntInstrumentos.agregar(nuevoInstrumento);
-                modelINS.setRowCount(0);
-                for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
-                    Object[] fila = {
-                            cjntInstrumentos.recuperar(i).getSerie(),
-                            cjntInstrumentos.recuperar(i).getDescripcion(),
-                            cjntInstrumentos.recuperar(i).getMinimo(),
-                            cjntInstrumentos.recuperar(i).getMaximo(),
-                            cjntInstrumentos.recuperar(i).getTolerancia(),
-                            cjntInstrumentos.recuperar(i).getTipo()
-                    };
-                    modelINS.addRow(fila);
-                }
+
+                refrescarInstrumentos();
 
                 modeloTablaInstrumentos.fireTableDataChanged();
                 JOptionPane.showMessageDialog(null, "Instrumento agregado existosamente");
@@ -141,7 +147,7 @@ public class HELLO extends JFrame{
                 String txtCodigo = codigo.getText();
                 String txtNombre = nombre.getText();
                 String txtUnidad = unidad.getText();
-                comboBoxTipoINS.addItem(txtNombre);
+                comboBoxTipoINS.addItem(txtNombre); // Añade el nombre del tipo a ComboBox
                 tiposInstrumento = new TiposInstrumento(txtCodigo,txtNombre,txtUnidad);
                 cjntTiposInsrumentos.agregar(tiposInstrumento);
                 model.setRowCount(0);
@@ -382,6 +388,12 @@ public class HELLO extends JFrame{
                 } catch (ParserConfigurationException ex) {
                     JOptionPane.showMessageDialog(null,"Error en el archivo XML");
                 }
+            }
+        });
+        comboBoxTipoINS.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refrescarInstrumentos();
             }
         });
     }
