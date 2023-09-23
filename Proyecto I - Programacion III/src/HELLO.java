@@ -181,6 +181,9 @@ public class HELLO extends JFrame{
                 String referenciaNombre = nombre.getText();
                 String referenciaUnidad = unidad.getText();
 
+                comboBoxTipoINS.removeItem(referenciaNombre); // elimina el item de comboBox
+                refrescarInstrumentos();
+
                 tiposInstrumento = new TiposInstrumento(referenciaCodigo,referenciaNombre,referenciaUnidad);
                 cjntTiposInsrumentos.borrar(referenciaCodigo,referenciaNombre,referenciaUnidad);
 
