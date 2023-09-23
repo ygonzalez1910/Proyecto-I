@@ -167,9 +167,9 @@ public class HELLO extends JFrame{
         limpiarButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                codigo.setText("");
-                unidad.setText("");
-                nombre.setText("");
+                codigo.setText(" ");
+                unidad.setText(" ");
+                nombre.setText(" ");
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
         });
@@ -341,7 +341,7 @@ public class HELLO extends JFrame{
                 textField2.setText("");
                 textField4.setText("");
                 textField3.setText("");
-                modeloTablaCalibraciones.fireTableDataChanged();
+                modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
         });
         borrarButton1.addActionListener(new ActionListener() {
