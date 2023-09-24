@@ -35,6 +35,7 @@ public class HELLO extends JFrame{
     private JTextField textField4;
     private JLabel infoCalib;
     ImageIcon icon = new ImageIcon("C:\\Users\\ypgon\\Desktop\\Proyecto I - Progra III\\Proyecto I\\Proyecto I - Programacion III\\src\\Imagenes\\pdf-icon-png-pdf-zum-download-2.png"); // Reemplaza con la ruta de tu imagen
+    ImageIcon iconUNA= new ImageIcon("C:\\Users\\HP\\Music\\proyecto-1\\Proyecto-I\\Proyecto I - Programacion III\\out\\production\\Proyecto I - Programacion III\\Imagenes\\logo-universidad-nacional-costa-rica.png");
     private JButton guardarButton1;
     private JButton borrarButton1;
     private JButton limpiarButton1;
@@ -47,6 +48,7 @@ public class HELLO extends JFrame{
     private JButton reporteButton;
     private JButton reporte = new JButton("Reporte",icon);
     private JTable table2;
+    private JLabel imganenUNA = new JLabel(iconUNA);
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
     private ConjuntoCalibraciones cjntCalibraciones;
