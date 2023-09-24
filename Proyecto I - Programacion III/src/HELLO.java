@@ -3,7 +3,9 @@ import org.w3c.dom.Node;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
@@ -35,7 +37,7 @@ public class HELLO extends JFrame{
     private JTextField textField4;
     private JLabel infoCalib;
     ImageIcon icon = new ImageIcon("C:\\Users\\ypgon\\Desktop\\Proyecto I - Progra III\\Proyecto I\\Proyecto I - Programacion III\\src\\Imagenes\\pdf-icon-png-pdf-zum-download-2.png"); // Reemplaza con la ruta de tu imagen
-    ImageIcon iconUNA= new ImageIcon("C:\\Users\\HP\\Music\\proyecto-1\\Proyecto-I\\Proyecto I - Programacion III\\out\\production\\Proyecto I - Programacion III\\Imagenes\\logo-universidad-nacional-costa-rica.png");
+    ImageIcon iconUNA= new ImageIcon("src\\Imagenes\\logo-universidad-nacional-costa-rica.png");
     private JButton guardarButton1;
     private JButton borrarButton1;
     private JButton limpiarButton1;
@@ -49,6 +51,7 @@ public class HELLO extends JFrame{
     private JButton reporte = new JButton("Reporte",icon);
     private JTable table2;
     private JLabel imganenUNA = new JLabel(iconUNA);
+    private JPanel tablaListadoINS;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
     private ConjuntoCalibraciones cjntCalibraciones;
@@ -112,6 +115,14 @@ public class HELLO extends JFrame{
         //String[] opciones = {"Opción 1", "Opción 2", "Opción 3", "Opción 4"};
        // comboBoxTipoINS = new JComboBox<>(opciones);
 
+        cjntInstrumentos = new ConjuntoInstrumentos();
+        modeloTablaInstrumentos = new ModeloTablaInstrumentos(cjntInstrumentos);
+        tableInstrumentos.setModel(modeloTablaInstrumentos);
+        JTableHeader header = tableInstrumentos.getTableHeader();
+        tablaListadoINS.setLayout(new BorderLayout());
+        tablaListadoINS.add(header, BorderLayout.NORTH);
+        tablaListadoINS.add(new JScrollPane(tableInstrumentos), BorderLayout.CENTER);
+        /*
         JTable tablaInstrumentosINS = new JTable();
         //model.addColumn("No. Serie");
         modelINS.addColumn("Descripcion");
@@ -122,6 +133,8 @@ public class HELLO extends JFrame{
         cjntInstrumentos = new ConjuntoInstrumentos();
         modeloTablaInstrumentos =new ModeloTablaInstrumentos(cjntInstrumentos);
         tablaInstrumentosINS.setModel(modeloTablaTipoInstrumentos);
+        */
+
         guardarButtonINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
