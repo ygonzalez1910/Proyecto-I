@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class HELLO extends JFrame{
    private JPanel panelPrincipal;
@@ -142,7 +143,7 @@ public class HELLO extends JFrame{
                 txtMinimoINS.setText("");
                 txtMaximoINS.setText("");
                 txtToleranciaINS.setText("");
-                
+
             }
 
         });
@@ -258,35 +259,33 @@ public class HELLO extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String txtSerie = txtSerieINS.getText();
                 String txtDescripcion = txtDescripcionINS.getText();
-
                 int txtMinimo = Integer.parseInt(txtMinimoINS.getText());
                 int txtMaximo = Integer.parseInt(txtMaximoINS.getText());
-
                 int txtTolerancia = Integer.parseInt(txtToleranciaINS.getText());
-                String txtTipo = comboBoxTipoINS.getName();
+                String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
 
-                cjntInstrumentos.borrar(txtSerie, txtDescripcion, txtMinimo, txtMaximo, txtTolerancia, txtTipo);
 
-                for (int i = 0; i < cjntTiposInsrumentos.numTipoInstrumento(); i++) {
-                    if (instrumentos.getSerie().equals(txtSerie) &&
-                            instrumentos.getDescripcion().equals(txtDescripcion) &&
-                            instrumentos.getMinimo() == txtMinimo && // Usamos == para comparar ints
-                            instrumentos.getMaximo() == txtMaximo && // Usamos == para comparar ints
-                            instrumentos.getTolerancia() == txtTolerancia  &&
-                            instrumentos.getTipo().equals(txtTipo)) {
-
-                        Object[] fila = {
-                                cjntInstrumentos.recuperar(i).getSerie(),
-                                cjntInstrumentos.recuperar(i).getDescripcion(),
-                                cjntInstrumentos.recuperar(i).getMinimo(),
-                                cjntInstrumentos.recuperar(i).getMaximo(),
-                                cjntInstrumentos.recuperar(i).getTolerancia()
-                        };
+                //cjntInstrumentos.borrar(txtSerie, txtDescripcion, txtMinimo, txtMaximo, txtTolerancia, txtTipo);
+                for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
+                    if (Objects.equals(cjntInstrumentos.recuperar(i).getSerie(), txtSerie) &&
+                            Objects.equals(cjntInstrumentos.recuperar(i).getDescripcion(), txtDescripcion) &&
+                            cjntInstrumentos.recuperar(i).getMinimo() == txtMinimo && // Usamos == para comparar ints
+                            cjntInstrumentos.recuperar(i).getMaximo() == txtMaximo && // Usamos == para comparar ints
+                            cjntInstrumentos.recuperar(i).getTolerancia() == txtTolerancia  &&
+                            Objects.equals(cjntInstrumentos.recuperar(i).getTipo(), txtTipo)) {
+                        Instrumento a =  cjntInstrumentos.recuperar(i);
+                        cjntInstrumentos.remover(a);
+                        modeloTablaTipoInstrumentos.fireTableDataChanged();
+                        JOptionPane.showMessageDialog(null, "Tipo de instrumento eliminado exitosamente.");
+                        refrescarInstrumentos(); // actualiza la tabla
+                        txtSerieINS.setText("");
+                        txtDescripcionINS.setText("");  // una vez boorado el elemento se limpian los textField
+                        txtMinimoINS.setText("");
+                        txtMaximoINS.setText("");
+                        txtToleranciaINS.setText("");
                     }
                 }
 
-                modeloTablaTipoInstrumentos.fireTableDataChanged();
-                JOptionPane.showMessageDialog(null, "Tipo de instrumento eliminado exitosamente.");
             }
 
         });
