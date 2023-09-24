@@ -777,7 +777,7 @@
                             <properties/>
                             <border type="none"/>
                             <children>
-                              <component id="e8793" class="javax.swing.JLabel" binding="imganenUNA">
+                              <component id="e8793" class="javax.swing.JLabel" binding="imagenUNA">
                                 <constraints/>
                                 <properties>
                                   <horizontalAlignment value="0"/>

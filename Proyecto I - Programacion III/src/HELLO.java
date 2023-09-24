@@ -50,7 +50,7 @@ public class HELLO extends JFrame{
     private JButton reporteButton;
     private JButton reporte = new JButton("Reporte",icon);
     private JTable table2;
-    private JLabel imganenUNA = new JLabel(iconUNA);
+    private JLabel imagenUNA = new JLabel(iconUNA);
     private JPanel tablaListadoINS;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
