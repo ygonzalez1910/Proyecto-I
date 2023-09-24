@@ -136,6 +136,13 @@ public class HELLO extends JFrame{
 
                 modeloTablaInstrumentos.fireTableDataChanged();
                 JOptionPane.showMessageDialog(null, "Instrumento agregado existosamente");
+
+                txtSerieINS.setText("");
+                txtDescripcionINS.setText("");
+                txtMinimoINS.setText("");
+                txtMaximoINS.setText("");
+                txtToleranciaINS.setText("");
+                
             }
 
         });
