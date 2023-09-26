@@ -1,3 +1,4 @@
+import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class ConjuntoTiposInstrumento {
@@ -22,16 +23,26 @@ public class ConjuntoTiposInstrumento {
         }
         return "El tipo de instrumento no fue encontrado";
     }
-    public void borrar(String codigo, String nombre, String unidad){
-        for(int i = 0; i < tiposInstrumentos.size(); i++){
-            if(tiposInstrumentos.get(i).getNombre().equals(nombre) && tiposInstrumentos.get(i).getCodigo().equals(codigo) && tiposInstrumentos.get(i).getUnidad().equals(unidad) ){
+    public void borrar(String codigo, String nombre, String unidad) {
+        for (int i = 0; i < tiposInstrumentos.size(); i++) {
+            if (tiposInstrumentos.get(i).getNombre().equals(nombre)
+                    && tiposInstrumentos.get(i).getCodigo().equals(codigo)
+                    && tiposInstrumentos.get(i).getUnidad().equals(unidad)) {
                 tiposInstrumentos.remove(i);
             }
         }
     }
+
     public void agregar(TiposInstrumento nuevoTipoInstrumento){
         tiposInstrumentos.add(nuevoTipoInstrumento);
     }
+    public void eliminarFila(int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < tiposInstrumentos.size()) {
+            tiposInstrumentos.remove(rowIndex); // 'data' es la lista que almacena tus objetos Alumno
+            modeloTabla.fireTableRowsDeleted(rowIndex,rowIndex);
+        }
+    }
     private ArrayList<TiposInstrumento> tiposInstrumentos;
+    private AbstractTableModel modeloTabla;
 
 }

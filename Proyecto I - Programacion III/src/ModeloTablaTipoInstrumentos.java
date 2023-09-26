@@ -1,7 +1,6 @@
 import javax.swing.table.AbstractTableModel;
 public class ModeloTablaTipoInstrumentos extends AbstractTableModel {
     private final ConjuntoTiposInstrumento cjTiposInstrumento;
-    private Object[][] data = new Object[0][3];
 
     public ModeloTablaTipoInstrumentos(ConjuntoTiposInstrumento cjTiposInstrumento) {
         this.cjTiposInstrumento = cjTiposInstrumento;
@@ -22,19 +21,17 @@ public class ModeloTablaTipoInstrumentos extends AbstractTableModel {
     public String getColumnName(int col) {
         return TiposInstrumento.nombreCampos()[col];
     }
-
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return cjTiposInstrumento.recuperar(rowIndex).toArray()[columnIndex];
-    }
-    public void addRow(Object[] rowData) {
-        Object[][] newData = new Object[data.length + 1][7];
-        for (int i = 0; i < data.length; i++) {
-            newData[i] = data[i];
+        TiposInstrumento tipo = cjTiposInstrumento.recuperar(rowIndex);
+        switch (columnIndex) {
+            case 0: return tipo.getCodigo();
+            case 1: return tipo.getNombre();
+            case 2: return tipo.getUnidad();
+            default: return null;
         }
-        newData[data.length] = rowData;
-        data = newData;
-        fireTableDataChanged();
     }
+
+    private final String[] nombresColumnas = {"Codigo", "Nombre", "Unidad"};
 
 }

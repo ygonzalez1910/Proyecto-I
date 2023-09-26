@@ -13,45 +13,71 @@ import java.util.Objects;
 public class HELLO extends JFrame{
    private JPanel panelPrincipal;
     private JTabbedPane tablaInstrumentosINS;
-    private JButton guardarButtonINS;
+    private JButton guardarInstrumento;
     private JTextField txtSerieINS;
     private JTextField txtMinimoINS;
     private JTextField txtToleranciaINS;
     private JTextField txtDescripcionINS;
     private JTextField txtMaximoINS;
     private JComboBox comboBoxTipoINS;
-    private JButton limpiarButtonINS;
-    private JButton borrarButtonINS;
-    private JTextField txtBusquedaDescripcionINS;
+    private JButton limpiarInstrumento;
+    private JButton borrarInstrumento;
     private JButton buscarButtonINS;
     private JButton reporteButtonINS;
     private JTable tableInstrumentos;
     private JPanel Calibraciones;
-    private JButton guardarButton;
-    private JButton borrarButton;
-    private JButton limpiarButton;
+    private JButton guardarCalibracion;
+    private JButton borrarCalibracion;
+    private JButton limpiarCalibracion;
     private JButton buscarButton;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
+    private JTextField txtNoBusqueda;
+    private JTextField txtNoCalibracion;
+    private JTextField txtMediciones;
+    private JTextField txtFecha;
     private JLabel infoCalib;
-    ImageIcon icon = new ImageIcon("C:\\Users\\ypgon\\Desktop\\Proyecto I - Progra III\\Proyecto I\\Proyecto I - Programacion III\\src\\Imagenes\\pdf-icon-png-pdf-zum-download-2.png"); // Reemplaza con la ruta de tu imagen
+    //ImageIcon icon = new ImageIcon("C:\\Users\\ypgon\\Desktop\\Proyecto I - Progra III\\Proyecto I\\Proyecto I - Programacion III\\src\\Imagenes\\pdf-icon-png-pdf-zum-download-2.png"); // Reemplaza con la ruta de tu imagen
     ImageIcon iconUNA= new ImageIcon("src\\Imagenes\\logo-universidad-nacional-costa-rica.png");
-    private JButton guardarButton1;
-    private JButton borrarButton1;
-    private JButton limpiarButton1;
+    private JButton guardarTipoIns;
+    private JButton borrarTipoIns;
+    private JButton limpiarTipoIns;
     private JTextField unidad;
     private JTextField codigo;
     private JTextField nombre;
     private JTable tablaTiposInstruemento;
     private JButton buscar;
     private JButton reporteButton;
-    private JButton reporte = new JButton("Reporte",icon);
-    private JTable table2;
+    private JButton reporte ;
     private JLabel imagenUNA = new JLabel(iconUNA);
-    private JPanel tablaListadoINS;
-    private JPanel tablaListadoTiposINS;
+    private JTable tablaCalibraciones;
+    private JPanel TablaListadoTiposIns;
+    private JPanel TablaListadoCalibraciones;
+    private JPanel TablaListadoInstrumentos;
+    private JPanel informacionTipoIns;
+    private JPanel TipoIns;
+    private JPanel BusquedaPanel;
+    private JPanel busquedaPanelns;
+    private JLabel serieBusquedaLabel;
+    private JPanel ListadoTipoIns;
+    private JTextField txtSerieBusqueda;
+    private JButton busquedaInstrumento;
+    private JPanel Instrumentos;
+    private JPanel InfoIns;
+    private JPanel AcercaDe;
+    private JLabel txtSerie;
+    private JLabel txtTipo;
+    private JLabel txtMaximo;
+    private JLabel txtDescripcion;
+    private JLabel txtTolerancia;
+    private JLabel txtMinimo;
+    private JPanel InstrumentoCalibracion;
+    private JPanel Calibracion;
+    private JPanel BusquedaCalibracion;
+    private JLabel numeroCalibracion;
+    private JLabel numeroMediciones;
+    private JLabel fecha;
+    private JLabel NumeroCalibBusqueda;
+    private JButton reporteInstrumento;
+    //private JPanel tabla;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
     private ConjuntoCalibraciones cjntCalibraciones;
@@ -97,81 +123,45 @@ public class HELLO extends JFrame{
     public void refrescarTablaInstrumentos(){
         tableInstrumentos.setModel(modelINS);
     }
-    //private void setImageLabel(JLabel labelName, String root){
-      //  ImagenIcon image = new ImageIcon(root);
-        //Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.get))
-        //}
     public HELLO(){
 
+        //inicializacion valores de tipos de instrumento
         JTable tablaTiposInstrumento = new JTable();
-        model.addColumn("Codigo");
-        model.addColumn("Nombre");
-        model.addColumn("Unidad");
-        refrescarTabla();
         cjntTiposInsrumentos = new ConjuntoTiposInstrumento();
         modeloTablaTipoInstrumentos = new ModeloTablaTipoInstrumentos(cjntTiposInsrumentos);
         tablaTiposInstrumento.setModel(modeloTablaTipoInstrumentos);
-/*
+
+        //nombre columnas de Tipos de Instrumento
+        JTableHeader headerTipoInst = tablaTiposInstrumento.getTableHeader();
+        TablaListadoTiposIns.setLayout(new BorderLayout());
+        TablaListadoTiposIns.add(headerTipoInst,BorderLayout.NORTH);
+        TablaListadoTiposIns.add(new JScrollPane(tablaTiposInstrumento),BorderLayout.CENTER);
+
+        //inicializacion valores de instrumentos
         cjntInstrumentos = new ConjuntoInstrumentos();
         modeloTablaInstrumentos = new ModeloTablaInstrumentos(cjntInstrumentos);
         tableInstrumentos.setModel(modeloTablaInstrumentos);
-        JTableHeader header = tableInstrumentos.getTableHeader();
-        tablaListadoINS.setLayout(new BorderLayout());
-        tablaListadoINS.add(header, BorderLayout.NORTH);
-        tablaListadoINS.add(new JScrollPane(tableInstrumentos), BorderLayout.CENTER);
-        //String[] opciones = {"Opción 1", "Opción 2", "Opción 3", "Opción 4"};
-       // comboBoxTipoINS = new JComboBox<>(opciones);
-*/
-        cjntInstrumentos = new ConjuntoInstrumentos();
-        modeloTablaInstrumentos = new ModeloTablaInstrumentos(cjntInstrumentos);
-        tableInstrumentos.setModel(modeloTablaInstrumentos);
-        JTableHeader header = tableInstrumentos.getTableHeader();
-        tablaListadoINS.setLayout(new BorderLayout());
-        tablaListadoINS.add(header, BorderLayout.NORTH);
-        tablaListadoINS.add(new JScrollPane(tableInstrumentos), BorderLayout.CENTER);
-        /*
-        JTable tablaInstrumentosINS = new JTable();
-        //model.addColumn("No. Serie");
-        modelINS.addColumn("Descripcion");
-        modelINS.addColumn("Minimo");
-        modelINS.addColumn("Maximo");
-        modelINS.addColumn("Tolerancia");
-        refrescarTablaInstrumentos();
-        cjntInstrumentos = new ConjuntoInstrumentos();
-        modeloTablaInstrumentos =new ModeloTablaInstrumentos(cjntInstrumentos);
-        tablaInstrumentosINS.setModel(modeloTablaTipoInstrumentos);
-        */
 
-        guardarButtonINS.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String txtSerie = txtSerieINS.getText();
-                String txtDescripcion = txtDescripcionINS.getText();
-                int txtMinimo = Integer.parseInt(txtMinimoINS.getText());
-                int txtMaximo = Integer.parseInt(txtMaximoINS.getText());
-                int txtTolerancia = Integer.parseInt(txtToleranciaINS.getText());
-                String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
+        //nombre columnas de Instrumentos
+        JTableHeader headerInstrumentos = tableInstrumentos.getTableHeader();
+        TablaListadoInstrumentos.setLayout(new BorderLayout());
+        TablaListadoInstrumentos.add(headerInstrumentos,BorderLayout.NORTH);
+        TablaListadoInstrumentos.add(new JScrollPane(tableInstrumentos), BorderLayout.CENTER);
 
-                Instrumento nuevoInstrumento = new Instrumento(txtSerie, txtDescripcion, txtMinimo, txtMaximo, txtTolerancia, txtTipo);
-                cjntInstrumentos.agregar(nuevoInstrumento);
+        //inicializacion valores de calibraciones
+        cjntCalibraciones = new ConjuntoCalibraciones();
+        modeloTablaCalibraciones = new ModeloTablaCalibraciones(cjntCalibraciones);
+        tablaCalibraciones.setModel(modeloTablaCalibraciones);
 
-                refrescarInstrumentos();
+        //nombres columnas de calibraciones
+        JTableHeader headerCalibraciones = tablaCalibraciones.getTableHeader();
+        TablaListadoCalibraciones.setLayout(new BorderLayout());
+        TablaListadoCalibraciones.add(headerCalibraciones,BorderLayout.NORTH);
+        TablaListadoCalibraciones.add(new JScrollPane(tablaCalibraciones), BorderLayout.CENTER);
 
-                modeloTablaInstrumentos.fireTableDataChanged();
-                JOptionPane.showMessageDialog(null, "Instrumento agregado existosamente");
-
-                txtSerieINS.setText("");
-                txtDescripcionINS.setText("");
-                txtMinimoINS.setText("");
-                txtMaximoINS.setText("");
-                txtToleranciaINS.setText("");
-
-            }
-
-        });
 
         //guardar los tipos de instrumentos
-        guardarButton1.addActionListener(new ActionListener() {
+        guardarTipoIns.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String txtCodigo = codigo.getText();
@@ -194,7 +184,8 @@ public class HELLO extends JFrame{
                 JOptionPane.showMessageDialog(null, "Tipo de instrumento agregado existosamente");
             }
         });
-        limpiarButton1.addActionListener(new ActionListener() {
+        //limpiar tipoIns
+        limpiarTipoIns.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 codigo.setText(" ");
@@ -203,36 +194,7 @@ public class HELLO extends JFrame{
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
         });
-        borrarButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                String referenciaCodigo = codigo.getText();
-                String referenciaNombre = nombre.getText();
-                String referenciaUnidad = unidad.getText();
-
-                comboBoxTipoINS.removeItem(referenciaNombre); // elimina el item de comboBox
-                refrescarInstrumentos();
-
-                tiposInstrumento = new TiposInstrumento(referenciaCodigo,referenciaNombre,referenciaUnidad);
-                cjntTiposInsrumentos.borrar(referenciaCodigo,referenciaNombre,referenciaUnidad);
-
-                for(int i = 0; i < cjntTiposInsrumentos.numTipoInstrumento();i++){
-                    if(tiposInstrumento.getNombre()== referenciaNombre && tiposInstrumento.getCodigo() == referenciaCodigo
-                       && tiposInstrumento.getUnidad() == referenciaUnidad){
-                        Object [] fila={
-                                cjntTiposInsrumentos.recuperar(i).getCodigo(),
-                                cjntTiposInsrumentos.recuperar(i).getNombre(),
-                                cjntTiposInsrumentos.recuperar(i).getUnidad()
-
-                        };
-                    }
-
-                }
-                modeloTablaTipoInstrumentos.fireTableDataChanged();
-                JOptionPane.showMessageDialog(null,"Tipo de instrumento eliminado exitosamente.");
-            }
-        });
+        //buscar tipo de instrumentos
         buscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -240,6 +202,7 @@ public class HELLO extends JFrame{
                 JOptionPane.showMessageDialog(panelPrincipal,cjntTiposInsrumentos.buscar(referencNombre));
             }
         });
+        //reporte tipos de instrumento
         reporte.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -263,90 +226,13 @@ public class HELLO extends JFrame{
                 }
             }
         });
-
-        limpiarButtonINS.addActionListener(new ActionListener() {
+        //guardar calibraciones
+        guardarCalibracion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                txtSerieINS.setText("");
-                txtDescripcionINS.setText("");
-                txtMinimoINS.setText("");
-                txtMaximoINS.setText("");
-                txtToleranciaINS.setText("");
-                modeloTablaInstrumentos.fireTableDataChanged();
-
-            }
-        });
-        borrarButtonINS.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String txtSerie = txtSerieINS.getText();
-                String txtDescripcion = txtDescripcionINS.getText();
-                int txtMinimo = Integer.parseInt(txtMinimoINS.getText());
-                int txtMaximo = Integer.parseInt(txtMaximoINS.getText());
-                int txtTolerancia = Integer.parseInt(txtToleranciaINS.getText());
-                String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
-
-
-                //cjntInstrumentos.borrar(txtSerie, txtDescripcion, txtMinimo, txtMaximo, txtTolerancia, txtTipo);
-                for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
-                    if (Objects.equals(cjntInstrumentos.recuperar(i).getSerie(), txtSerie) &&
-                            Objects.equals(cjntInstrumentos.recuperar(i).getDescripcion(), txtDescripcion) &&
-                            cjntInstrumentos.recuperar(i).getMinimo() == txtMinimo && // Usamos == para comparar ints
-                            cjntInstrumentos.recuperar(i).getMaximo() == txtMaximo && // Usamos == para comparar ints
-                            cjntInstrumentos.recuperar(i).getTolerancia() == txtTolerancia  &&
-                            Objects.equals(cjntInstrumentos.recuperar(i).getTipo(), txtTipo)) {
-                        Instrumento a =  cjntInstrumentos.recuperar(i);
-                        cjntInstrumentos.remover(a);
-                        modeloTablaTipoInstrumentos.fireTableDataChanged();
-                        JOptionPane.showMessageDialog(null, "Tipo de instrumento eliminado exitosamente.");
-                        refrescarInstrumentos(); // actualiza la tabla
-                        txtSerieINS.setText("");
-                        txtDescripcionINS.setText("");  // una vez boorado el elemento se limpian los textField
-                        txtMinimoINS.setText("");
-                        txtMaximoINS.setText("");
-                        txtToleranciaINS.setText("");
-                    }
-                }
-
-            }
-
-        });
-        reporteButtonINS.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Document d;
-                try {
-                    d = UtilidadesXML.crearDocumento();
-                    Node r = d.createElement("DatosInstrumentos");
-
-                    int numero = cjntInstrumentos.numInstrumento();
-                    int i = 0;
-                    while(i <numero){
-                        r.appendChild(cjntInstrumentos.recuperar(i).toXML(d));
-                        i++;
-                    }
-                    d.appendChild(r);
-
-                    UtilidadesXML.guardarArchivoXML(d, "instrumentos.xml");
-                    JOptionPane.showMessageDialog(null,"Archivo XML generado exitosamente.");
-                } catch (ParserConfigurationException ex) {
-                    JOptionPane.showMessageDialog(null,"Error en el archivo XML");
-                }
-            }
-        });
-        buscarButtonINS.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String referenciaDescripcion = txtDescripcionINS.getText();
-                JOptionPane.showMessageDialog(panelPrincipal,cjntInstrumentos.buscar(referenciaDescripcion));
-            }
-        });
-        guardarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                double txtNumero = Double.parseDouble(textField2.getText());
-                String txtFecha = textField4.getText();
-                int txtMediciones = Integer.parseInt(textField3.getText());
+                double txtNumero = Double.parseDouble(txtNoCalibracion.getText());
+                String txtFecha = HELLO.this.txtFecha.getText();
+                int txtMediciones = Integer.parseInt(HELLO.this.txtMediciones.getText());
                 Calibraciones calibracion = new Calibraciones(txtNumero,txtFecha,txtMediciones);
                 cjntCalibraciones.agregar(calibracion);
                 model.setRowCount(0);
@@ -363,41 +249,7 @@ public class HELLO extends JFrame{
                 JOptionPane.showMessageDialog(null, "Calibracion agregada existosamente");
             }
         });
-        limpiarButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                textField2.setText("");
-                textField4.setText("");
-                textField3.setText("");
-                modeloTablaTipoInstrumentos.fireTableDataChanged();
-            }
-        });
-        borrarButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Double txtNumero = Double.parseDouble(textField2.getText());
-                String txtFecha = textField4.getText();
-                int txtMediciones = Integer.parseInt(textField3.getText());
-
-                cjntCalibraciones.borrar(txtNumero,txtFecha,txtMediciones);
-
-                for (int i = 0; i < cjntCalibraciones.numCalibraciones(); i++) {
-                    if (calibraciones.getNumeroCalibracion() == txtNumero &&
-                            calibraciones.getFecha().equals(txtFecha) &&
-                            calibraciones.getMediciones() == txtMediciones) {
-
-                        Object[] fila = {
-                                cjntCalibraciones.recuperar(i).getNumeroCalibracion(),
-                                cjntCalibraciones.recuperar(i).getFecha(),
-                                cjntCalibraciones.recuperar(i).getMediciones()
-                        };
-                    }
-                }
-
-                modeloTablaCalibraciones.fireTableDataChanged();
-                JOptionPane.showMessageDialog(null, "Calibracion eliminada exitosamente.");
-            }
-        });
+        //reporte calbraciones
         reporteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -421,10 +273,135 @@ public class HELLO extends JFrame{
                 }
             }
         });
+        //BORRAR TIPOiNSTRUMENTO
+        borrarTipoIns.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String referenciaCodigo = codigo.getText();
+                String referenciaNombre = nombre.getText();
+                String referenciaUnidad = unidad.getText();
+
+                int filaSeleccionada = tablaTiposInstrumento.getSelectedRow();
+                if (filaSeleccionada >= 0) {
+                    cjntTiposInsrumentos.eliminarFila(filaSeleccionada);
+                    modeloTablaTipoInstrumentos.fireTableDataChanged();
+                    DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>) comboBoxTipoINS.getModel();
+                    comboBoxModel.removeElement(referenciaNombre);
+                    cjntTiposInsrumentos.borrar(referenciaCodigo, referenciaNombre, referenciaUnidad);
+                    JOptionPane.showMessageDialog(null, "Tipo de instrumento eliminado exitosamente.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar.");
+                }
+            }
+        });
+
+        //BOTON NUEVO
+        guardarInstrumento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String txtSerie = txtSerieINS.getText();
+                String txtDescripcion = txtDescripcionINS.getText();
+                int txtMinimo = Integer.parseInt(txtMinimoINS.getText());
+                int txtMaximo = Integer.parseInt(txtMaximoINS.getText());
+                int txtTolerancia = Integer.parseInt(txtToleranciaINS.getText());
+                String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
+
+                Instrumento nuevoInstrumento = new Instrumento(txtSerie, txtDescripcion, txtMinimo, txtMaximo, txtTolerancia, txtTipo);
+                cjntInstrumentos.agregar(nuevoInstrumento);
+
+                refrescarInstrumentos();
+
+                modeloTablaInstrumentos.fireTableDataChanged();
+                JOptionPane.showMessageDialog(null, "Instrumento agregado existosamente");
+
+                txtSerieINS.setText("");
+                txtDescripcionINS.setText("");
+                txtMinimoINS.setText("");
+                txtMaximoINS.setText("");
+                txtToleranciaINS.setText("");
+            }
+        });
+        //BOTON NUEVO
+        limpiarInstrumento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtSerieINS.setText("");
+                txtDescripcionINS.setText("");
+                txtMinimoINS.setText("");
+                txtMaximoINS.setText("");
+                txtToleranciaINS.setText("");
+                modeloTablaInstrumentos.fireTableDataChanged();
+
+            }
+        });
+        //BOTON NUEVO
+        borrarInstrumento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String txtSerie = txtSerieINS.getText();
+                String txtDescripcion = txtDescripcionINS.getText();
+                int txtMinimo = Integer.parseInt(txtMinimoINS.getText());
+                int txtMaximo = Integer.parseInt(txtMaximoINS.getText());
+                int txtTolerancia = Integer.parseInt(txtToleranciaINS.getText());
+                String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
+
+
+                for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
+                    if (Objects.equals(cjntInstrumentos.recuperar(i).getSerie(), txtSerie) &&
+                            Objects.equals(cjntInstrumentos.recuperar(i).getDescripcion(), txtDescripcion) &&
+                            cjntInstrumentos.recuperar(i).getMinimo() == txtMinimo && // Usamos == para comparar ints
+                            cjntInstrumentos.recuperar(i).getMaximo() == txtMaximo && // Usamos == para comparar ints
+                            cjntInstrumentos.recuperar(i).getTolerancia() == txtTolerancia  &&
+                            Objects.equals(cjntInstrumentos.recuperar(i).getTipo(), txtTipo)) {
+                        Instrumento a =  cjntInstrumentos.recuperar(i);
+                        cjntInstrumentos.remover(a);
+                        modeloTablaTipoInstrumentos.fireTableDataChanged();
+                        JOptionPane.showMessageDialog(null, "Tipo de instrumento eliminado exitosamente.");
+                        refrescarInstrumentos(); // actualiza la tabla
+                        txtSerieINS.setText("");
+                        txtDescripcionINS.setText("");  // una vez boorado el elemento se limpian los textField
+                        txtMinimoINS.setText("");
+                        txtMaximoINS.setText("");
+                        txtToleranciaINS.setText("");
+                    }
+                }
+            }
+        });
+        //BOTON NUEVO
+        busquedaInstrumento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String referenciaDescripcion = txtDescripcionINS.getText();
+                JOptionPane.showMessageDialog(panelPrincipal,cjntInstrumentos.buscar(referenciaDescripcion));
+            }
+        });
         comboBoxTipoINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 refrescarInstrumentos();
+            }
+        });
+        reporteInstrumento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Document d;
+                try {
+                    d = UtilidadesXML.crearDocumento();
+                    Node r = d.createElement("datosInstrumentos");
+
+                    int numero = cjntInstrumentos.numInstrumento();
+                    int i = 0;
+                    while(i <numero){
+                        r.appendChild(cjntInstrumentos.recuperar(i).toXML(d));
+                        i++;
+                    }
+                    d.appendChild(r);
+
+                    UtilidadesXML.guardarArchivoXML(d, "instrumentos.xml");
+                    JOptionPane.showMessageDialog(null,"Archivo XML generado exitosamente.");
+                } catch (ParserConfigurationException ex) {
+                    JOptionPane.showMessageDialog(null,"Error en el archivo XML");
+                }
             }
         });
     }
