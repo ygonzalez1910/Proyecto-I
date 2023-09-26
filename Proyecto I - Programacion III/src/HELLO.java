@@ -49,9 +49,8 @@ public class HELLO extends JFrame{
     private JButton buscar;
     private JButton reporteButton;
     private JButton reporte = new JButton("Reporte",icon);
-    private JTable table2;
     private JLabel imagenUNA = new JLabel(iconUNA);
-    private JPanel tablaListadoINS;
+    private JPanel tabla;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
     private ConjuntoCalibraciones cjntCalibraciones;
@@ -119,9 +118,9 @@ public class HELLO extends JFrame{
         modeloTablaInstrumentos = new ModeloTablaInstrumentos(cjntInstrumentos);
         tableInstrumentos.setModel(modeloTablaInstrumentos);
         JTableHeader header = tableInstrumentos.getTableHeader();
-        tablaListadoINS.setLayout(new BorderLayout());
-        tablaListadoINS.add(header, BorderLayout.NORTH);
-        tablaListadoINS.add(new JScrollPane(tableInstrumentos), BorderLayout.CENTER);
+        tableInstrumentos.setLayout(new BorderLayout());
+        tableInstrumentos.add(header, BorderLayout.NORTH);
+        modelINS.add(new JScrollPane(tableInstrumentos), BorderLayout.CENTER);
         /*
         JTable tablaInstrumentosINS = new JTable();
         //model.addColumn("No. Serie");
@@ -223,6 +222,8 @@ public class HELLO extends JFrame{
 
                 }
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
+                DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>)comboBoxTipoINS.getModel();
+                comboBoxModel.removeElement(referenciaNombre);
                 JOptionPane.showMessageDialog(null,"Tipo de instrumento eliminado exitosamente.");
             }
         });
