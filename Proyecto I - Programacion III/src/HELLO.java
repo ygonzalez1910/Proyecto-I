@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
@@ -35,8 +36,6 @@ public class HELLO extends JFrame{
     private JTextField txtMediciones;
     private JTextField txtFecha;
     private JLabel infoCalib;
-    //ImageIcon icon = new ImageIcon("C:\\Users\\ypgon\\Desktop\\Proyecto I - Progra III\\Proyecto I\\Proyecto I - Programacion III\\src\\Imagenes\\pdf-icon-png-pdf-zum-download-2.png"); // Reemplaza con la ruta de tu imagen
-    ImageIcon iconUNA= new ImageIcon("src\\Imagenes\\logo-universidad-nacional-costa-rica.png");
     private JButton guardarTipoIns;
     private JButton borrarTipoIns;
     private JButton limpiarTipoIns;
@@ -47,7 +46,6 @@ public class HELLO extends JFrame{
     private JButton buscar;
     private JButton reporteButton;
     private JButton reporte ;
-    private JLabel imagenUNA = new JLabel(iconUNA);
     private JTable tablaCalibraciones;
     private JPanel TablaListadoTiposIns;
     private JPanel TablaListadoCalibraciones;
@@ -124,6 +122,9 @@ public class HELLO extends JFrame{
         tableInstrumentos.setModel(modelINS);
     }
     public HELLO(){
+        TablaListadoTiposIns.setLayout(new BorderLayout());
+        TablaListadoInstrumentos.setLayout(new BorderLayout());
+        TablaListadoCalibraciones.setLayout(new BorderLayout());
 
         //inicializacion valores de tipos de instrumento
         JTable tablaTiposInstrumento = new JTable();
