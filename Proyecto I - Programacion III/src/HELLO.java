@@ -45,13 +45,13 @@ public class HELLO extends JFrame{
     private JTextField codigo;
     private JTextField nombre;
     private JTable tablaTiposInstruemento;
-    private JTable tablaCalibraciones;
     private JButton buscar;
     private JButton reporteButton;
     private JButton reporte = new JButton("Reporte",icon);
     private JTable table2;
     private JLabel imagenUNA = new JLabel(iconUNA);
     private JPanel tablaListadoINS;
+    private JPanel tablaListadoTiposINS;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
     private ConjuntoCalibraciones cjntCalibraciones;
@@ -111,10 +111,17 @@ public class HELLO extends JFrame{
         cjntTiposInsrumentos = new ConjuntoTiposInstrumento();
         modeloTablaTipoInstrumentos = new ModeloTablaTipoInstrumentos(cjntTiposInsrumentos);
         tablaTiposInstrumento.setModel(modeloTablaTipoInstrumentos);
-
+/*
+        cjntInstrumentos = new ConjuntoInstrumentos();
+        modeloTablaInstrumentos = new ModeloTablaInstrumentos(cjntInstrumentos);
+        tableInstrumentos.setModel(modeloTablaInstrumentos);
+        JTableHeader header = tableInstrumentos.getTableHeader();
+        tablaListadoINS.setLayout(new BorderLayout());
+        tablaListadoINS.add(header, BorderLayout.NORTH);
+        tablaListadoINS.add(new JScrollPane(tableInstrumentos), BorderLayout.CENTER);
         //String[] opciones = {"Opción 1", "Opción 2", "Opción 3", "Opción 4"};
        // comboBoxTipoINS = new JComboBox<>(opciones);
-
+*/
         cjntInstrumentos = new ConjuntoInstrumentos();
         modeloTablaInstrumentos = new ModeloTablaInstrumentos(cjntInstrumentos);
         tableInstrumentos.setModel(modeloTablaInstrumentos);
