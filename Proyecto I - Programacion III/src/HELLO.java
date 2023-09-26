@@ -13,15 +13,15 @@ import java.util.Objects;
 public class HELLO extends JFrame{
    private JPanel panelPrincipal;
     private JTabbedPane tablaInstrumentosINS;
-    private JButton guardarButtonINS;
+    private JButton guardarInstrumento;
     private JTextField txtSerieINS;
     private JTextField txtMinimoINS;
     private JTextField txtToleranciaINS;
     private JTextField txtDescripcionINS;
     private JTextField txtMaximoINS;
     private JComboBox comboBoxTipoINS;
-    private JButton limpiarButtonINS;
-    private JButton borrarButtonINS;
+    private JButton limpiarInstrumento;
+    private JButton borrarInstrumento;
     private JButton buscarButtonINS;
     private JButton reporteButtonINS;
     private JTable tableInstrumentos;
@@ -59,7 +59,7 @@ public class HELLO extends JFrame{
     private JLabel serieBusquedaLabel;
     private JPanel ListadoTipoIns;
     private JTextField txtSerieBusqueda;
-    private JButton busquedaButton;
+    private JButton busquedaInstrumento;
     private JPanel Instrumentos;
     private JPanel InfoIns;
     private JPanel AcercaDe;
@@ -76,6 +76,7 @@ public class HELLO extends JFrame{
     private JLabel numeroMediciones;
     private JLabel fecha;
     private JLabel NumeroCalibBusqueda;
+    private JButton reporteInstrumento;
     //private JPanel tabla;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
@@ -248,7 +249,6 @@ public class HELLO extends JFrame{
                 JOptionPane.showMessageDialog(null, "Calibracion agregada existosamente");
             }
         });
-
         //reporte calbraciones
         reporteButton.addActionListener(new ActionListener() {
             @Override
@@ -271,12 +271,6 @@ public class HELLO extends JFrame{
                 } catch (ParserConfigurationException ex) {
                     JOptionPane.showMessageDialog(null,"Error en el archivo XML");
                 }
-            }
-        });
-        comboBoxTipoINS.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                refrescarInstrumentos();
             }
         });
         //BORRAR TIPOiNSTRUMENTO
@@ -302,7 +296,7 @@ public class HELLO extends JFrame{
         });
 
         //BOTON NUEVO
-        guardarButtonINS.addActionListener(new ActionListener() {
+        guardarInstrumento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String txtSerie = txtSerieINS.getText();
@@ -328,7 +322,7 @@ public class HELLO extends JFrame{
             }
         });
         //BOTON NUEVO
-        limpiarButtonINS.addActionListener(new ActionListener() {
+        limpiarInstrumento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 txtSerieINS.setText("");
@@ -341,7 +335,7 @@ public class HELLO extends JFrame{
             }
         });
         //BOTON NUEVO
-        borrarButtonINS.addActionListener(new ActionListener() {
+        borrarInstrumento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String txtSerie = txtSerieINS.getText();
@@ -352,7 +346,6 @@ public class HELLO extends JFrame{
                 String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
 
 
-                //cjntInstrumentos.borrar(txtSerie, txtDescripcion, txtMinimo, txtMaximo, txtTolerancia, txtTipo);
                 for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
                     if (Objects.equals(cjntInstrumentos.recuperar(i).getSerie(), txtSerie) &&
                             Objects.equals(cjntInstrumentos.recuperar(i).getDescripcion(), txtDescripcion) &&
@@ -375,11 +368,40 @@ public class HELLO extends JFrame{
             }
         });
         //BOTON NUEVO
-        busquedaButton.addActionListener(new ActionListener() {
+        busquedaInstrumento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String referenciaDescripcion = txtDescripcionINS.getText();
                 JOptionPane.showMessageDialog(panelPrincipal,cjntInstrumentos.buscar(referenciaDescripcion));
+            }
+        });
+        comboBoxTipoINS.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refrescarInstrumentos();
+            }
+        });
+        reporteInstrumento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Document d;
+                try {
+                    d = UtilidadesXML.crearDocumento();
+                    Node r = d.createElement("datosInstrumentos");
+
+                    int numero = cjntInstrumentos.numInstrumento();
+                    int i = 0;
+                    while(i <numero){
+                        r.appendChild(cjntInstrumentos.recuperar(i).toXML(d));
+                        i++;
+                    }
+                    d.appendChild(r);
+
+                    UtilidadesXML.guardarArchivoXML(d, "instrumentos.xml");
+                    JOptionPane.showMessageDialog(null,"Archivo XML generado exitosamente.");
+                } catch (ParserConfigurationException ex) {
+                    JOptionPane.showMessageDialog(null,"Error en el archivo XML");
+                }
             }
         });
     }
