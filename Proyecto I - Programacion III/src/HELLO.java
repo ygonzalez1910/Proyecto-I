@@ -334,7 +334,7 @@ public class HELLO extends JFrame{
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
         });
-   
+
         reporteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -370,18 +370,22 @@ public class HELLO extends JFrame{
                 String referenciaCodigo = codigo.getText();
                 String referenciaNombre = nombre.getText();
                 String referenciaUnidad = unidad.getText();
-                comboBoxTipoINS.removeItem(referenciaNombre); // elimina el item de comboBox
-                cjntTiposInsrumentos.borrar(referenciaCodigo,referenciaNombre,referenciaUnidad);
+
                 int filaSeleccionada = tablaTiposInstrumento.getSelectedRow();
-                if (filaSeleccionada >= 0){
+                if (filaSeleccionada >= 0) {
                     cjntTiposInsrumentos.eliminarFila(filaSeleccionada);
+                    modeloTablaTipoInstrumentos.fireTableDataChanged();
+                    DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>) comboBoxTipoINS.getModel();
+                    comboBoxModel.removeElement(referenciaNombre);
+                    cjntTiposInsrumentos.borrar(referenciaCodigo, referenciaNombre, referenciaUnidad);
+                    JOptionPane.showMessageDialog(null, "Tipo de instrumento eliminado exitosamente.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar.");
                 }
-                modeloTablaTipoInstrumentos.fireTableDataChanged();
-                //DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>)comboBoxTipoINS.getModel();
-                //comboBoxModel.removeElement(referenciaNombre);
-                JOptionPane.showMessageDialog(null,"Tipo de instrumento eliminado exitosamente.");
             }
         });
+
+
     }
 
     public static void main(String[] args) {

@@ -29,15 +29,8 @@ public class ConjuntoTiposInstrumento {
                     && tiposInstrumentos.get(i).getCodigo().equals(codigo)
                     && tiposInstrumentos.get(i).getUnidad().equals(unidad)) {
                 tiposInstrumentos.remove(i);
-                if (modeloTabla != null) {
-                    modeloTabla.fireTableDataChanged();
-                }
-                break;
             }
         }
-    }
-    public void setModeloTabla(AbstractTableModel modeloTabla) {
-        this.modeloTabla = modeloTabla;
     }
 
     public void agregar(TiposInstrumento nuevoTipoInstrumento){
