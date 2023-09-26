@@ -661,15 +661,7 @@
                             </constraints>
                             <properties/>
                             <border type="none"/>
-                            <children>
-                              <component id="e8793" class="javax.swing.JLabel" binding="imagenUNA">
-                                <constraints/>
-                                <properties>
-                                  <horizontalAlignment value="0"/>
-                                  <text value="Aca deberia estar la imagen"/>
-                                </properties>
-                              </component>
-                            </children>
+                            <children/>
                           </scrollpane>
                           <scrollpane id="1abec">
                             <constraints>
