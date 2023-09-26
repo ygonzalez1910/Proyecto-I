@@ -1,3 +1,4 @@
+import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class ConjuntoCalibraciones {
@@ -35,5 +36,12 @@ public class ConjuntoCalibraciones {
     public void agregar(Calibraciones nuevaCalibracion){
         calibraciones.add(nuevaCalibracion);
     }
+    public void eliminarFila(int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < calibraciones.size()) {
+            calibraciones.remove(rowIndex); // 'data' es la lista que almacena tus objetos Alumno
+            modeloTabla.fireTableRowsDeleted(rowIndex,rowIndex);
+        }
+    }
+    private AbstractTableModel modeloTabla;
     private ArrayList<Calibraciones> calibraciones;
 }
