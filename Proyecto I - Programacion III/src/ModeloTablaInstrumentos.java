@@ -26,8 +26,20 @@ public class ModeloTablaInstrumentos extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return cjInstrumentos.recuperar(rowIndex).toArray()[columnIndex];
+        Instrumento instrumento = cjInstrumentos.recuperar(rowIndex);
+        switch (columnIndex) {
+            case 0: return instrumento.getSerie();
+            case 1: return instrumento.getDescripcion();
+            case 2: return instrumento.getMinimo();
+            case 3: return instrumento.getMaximo();
+            case 4: return instrumento.getTolerancia();
+            case 5: return instrumento.getTipo();
+            default: return null;
+        }
     }
+    private final String[] nombresColumnas = {"Serie", "Descripcion", "Minimo", "Maximo", "Tolerancia", "Tipo"};
+
+
     public void addRow(Object[] rowData) {
         Object[][] newData = new Object[data.length + 1][7];
         for (int i = 0; i < data.length; i++) {
