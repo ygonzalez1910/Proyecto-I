@@ -64,6 +64,7 @@ public class HELLO extends JFrame{
     public Calibraciones calibraciones;
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel modelINS = new DefaultTableModel();
+    
 
     private void initTable() {
         model = new DefaultTableModel(tiposInstrumento.nombreCampos(), 0);
