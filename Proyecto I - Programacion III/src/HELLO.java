@@ -102,7 +102,7 @@ public class HELLO extends JFrame{
         //Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.get))
         //}
     public HELLO(){
-
+/*
         JTable tablaTiposInstrumento = new JTable();
         model.addColumn("Codigo");
         model.addColumn("Nombre");
@@ -111,17 +111,17 @@ public class HELLO extends JFrame{
         cjntTiposInsrumentos = new ConjuntoTiposInstrumento();
         modeloTablaTipoInstrumentos = new ModeloTablaTipoInstrumentos(cjntTiposInsrumentos);
         tablaTiposInstrumento.setModel(modeloTablaTipoInstrumentos);
-/*
-        cjntInstrumentos = new ConjuntoInstrumentos();
-        modeloTablaInstrumentos = new ModeloTablaInstrumentos(cjntInstrumentos);
-        tableInstrumentos.setModel(modeloTablaInstrumentos);
-        JTableHeader header = tableInstrumentos.getTableHeader();
-        tablaListadoINS.setLayout(new BorderLayout());
-        tablaListadoINS.add(header, BorderLayout.NORTH);
-        tablaListadoINS.add(new JScrollPane(tableInstrumentos), BorderLayout.CENTER);
+*/
+        cjntTiposInsrumentos = new ConjuntoTiposInstrumento();
+        modeloTablaTipoInstrumentos = new ModeloTablaTipoInstrumentos(cjntTiposInsrumentos);
+        tablaTiposInstruemento.setModel(modeloTablaTipoInstrumentos);
+        JTableHeader headerTipoINS = tablaTiposInstruemento.getTableHeader();
+        tablaListadoTiposINS.setLayout(new BorderLayout());
+        tablaListadoTiposINS.add(headerTipoINS, BorderLayout.NORTH);
+        tablaListadoTiposINS.add(new JScrollPane(tablaTiposInstruemento), BorderLayout.CENTER);
         //String[] opciones = {"Opción 1", "Opción 2", "Opción 3", "Opción 4"};
        // comboBoxTipoINS = new JComboBox<>(opciones);
-*/
+
         cjntInstrumentos = new ConjuntoInstrumentos();
         modeloTablaInstrumentos = new ModeloTablaInstrumentos(cjntInstrumentos);
         tableInstrumentos.setModel(modeloTablaInstrumentos);
