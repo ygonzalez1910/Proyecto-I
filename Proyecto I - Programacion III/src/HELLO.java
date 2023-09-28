@@ -351,27 +351,29 @@ public class HELLO extends JFrame{
         borrarButtonCALI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Double txtNumero = Double.parseDouble(txtNumeroCALI.getText());
-                String txtFecha = txtFechaCALI.getText();
-                int txtMediciones = Integer.parseInt(txtMedicionesCALI.getText());
+                Double referenciaNoMediciones = Double.parseDouble(txtMedicionesCALI.getText());
+                String referenciaFecha = txtFechaCALI.getText();
+                int referenciaMediciones = Integer.parseInt(txtMedicionesCALI.getText());
 
-                cjntCalibraciones.borrar(txtNumero,txtFecha,txtMediciones);
+               // calibraciones = new Calibraciones(referenciaNoMediciones,referenciaFecha,referenciaMediciones);
+                cjntCalibraciones.borrar(referenciaNoMediciones,referenciaFecha,referenciaMediciones);
 
                 for (int i = 0; i < cjntCalibraciones.numCalibraciones(); i++) {
-                    if (calibraciones.getNumeroCalibracion() == txtNumero &&
-                            calibraciones.getFecha().equals(txtFecha) &&
-                            calibraciones.getMediciones() == txtMediciones) {
-
+                    Calibraciones calibracion = cjntCalibraciones.recuperar(i); // Obtener la calibración actual
+                    if (calibracion.getNumeroCalibracion() == referenciaNoMediciones
+                            && calibracion.getFecha().equals(referenciaFecha) // Usar equals para comparar cadenas
+                            && calibracion.getMediciones() == referenciaMediciones) {
                         Object[] fila = {
-                                cjntCalibraciones.recuperar(i).getNumeroCalibracion(),
-                                cjntCalibraciones.recuperar(i).getFecha(),
-                                cjntCalibraciones.recuperar(i).getMediciones()
+                                calibracion.getNumeroCalibracion(),
+                                calibracion.getFecha(),
+                                calibracion.getMediciones()
                         };
+                        // Haz lo que necesites con la fila aquí
                     }
                 }
 
                 modeloTablaCalibraciones.fireTableDataChanged();
-                JOptionPane.showMessageDialog(null, "Calibracion eliminada exitosamente.");
+                JOptionPane.showMessageDialog(null,"Calibracion eliminado exitosamente.");
             }
         });
         reporteButtonCALI.addActionListener(new ActionListener() {
@@ -400,7 +402,8 @@ public class HELLO extends JFrame{
         buscarButtonCALI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // por hacer---
+                int referenciaNumero = Integer.parseInt(txtBusquedaNumeroCALI.getText());
+                JOptionPane.showMessageDialog(panelPrincipal,cjntCalibraciones.buscar(referenciaNumero));
             }
         });
     }

@@ -75,7 +75,7 @@ public class Calibraciones {
     r[3] = numeroBusqueda;
     return r;
 }
-    private static final String[] NOMBRE_CAMPOS = {"Numero", "Fecha", "Mediciones", "Numero"};
+    private static final String[] NOMBRE_CAMPOS = {"Numero", "Fecha", "Mediciones"};
     private double numeroCalibracion;
     private double numeroBusqueda;
     private String fecha;
