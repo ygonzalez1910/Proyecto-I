@@ -16,12 +16,12 @@ public class ModeloTablaInstrumentos extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return TiposInstrumento.nombreCampos().length;
+        return Instrumento.nombreInstrumentos().length;
     }
 
     @Override
     public String getColumnName(int col) {
-        return TiposInstrumento.nombreCampos()[col];
+        return Instrumento.nombreInstrumentos()[col];
     }
 
     @Override
