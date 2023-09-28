@@ -1,6 +1,5 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -10,10 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+//Las variables terminadas en "...TIPINS" corresponden al panel de Tipos de Instrumentos
+//Las variables terminadas en "...INS" corresponden al panel de Instrumentos
+//Las variables terminadas en "...CALI" corresponden al panel de Calibraciones
 public class HELLO extends JFrame{
    private JPanel panelPrincipal;
     private JTabbedPane tablaInstrumentosINS;
-    private JButton guardarButtonINS;
+    private JButton guardarButtonINS; // de aca en adelante son las variables relacionadas a Intrumentos (...INS)
     private JTextField txtSerieINS;
     private JTextField txtMinimoINS;
     private JTextField txtToleranciaINS;
@@ -26,7 +28,7 @@ public class HELLO extends JFrame{
     private JButton buscarButtonINS;
     private JButton reporteButtonINS;
     private JTable tableInstrumentos;
-    private JPanel Calibraciones;
+    private JPanel Calibraciones; // de aca en adelante son las variables relacionadas a Calibraciones (...CALI)
     private JButton guardarButtonCALI;
     private JButton borrarButtonCALI;
     private JButton limpiarButtonCALI;
@@ -36,7 +38,9 @@ public class HELLO extends JFrame{
     private JTextField txtMedicionesCALI;
     private JTextField txtFechaCALI;
     private JLabel infoCalib;
-    private JButton guardarButtonTIPINS;
+    private JButton reporteButtonCALI;
+    private JTable tableCalibraciones;
+    private JButton guardarButtonTIPINS;    // de aca en adelante son las variables relacionadas a Tipos de Intrumentos (...TIPINS)
     private JButton borrarButtonTIPINS;
     private JButton limpiarButtonTIPINS;
     private JTextField txtUnidadTIPINS;
@@ -44,34 +48,23 @@ public class HELLO extends JFrame{
     private JTextField txtNombreTIPINS;
     private JTable tablaTiposInstruemento;
     private JButton buscarButtonTIPINS;
-    private JButton reporteButtonCALI;
     private JButton reporteButtonTIPINS;
-    private JTable table2;
     private JPanel tablaListadoINS;
     private JPanel tablaListadoTiposINS;
     private JTextField txtNumeroTIPINS;
-    private JLabel imagenUNA;
+    private JLabel imagenUNA;   // de aca en adelante son variables de otras cosas
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
     private ConjuntoCalibraciones cjntCalibraciones;
     private ModeloTablaTipoInstrumentos modeloTablaTipoInstrumentos;
     private ModeloTablaCalibraciones modeloTablaCalibraciones;
     private ModeloTablaInstrumentos modeloTablaInstrumentos;
-    private JTextField txtReferencia;
-    public TiposInstrumento tiposInstrumento;
-    public Instrumento instrumentos;
-    public Calibraciones calibraciones;
-    DefaultTableModel model = new DefaultTableModel();
-    DefaultTableModel modelINS = new DefaultTableModel();
-    private void initTable() {
-        model = new DefaultTableModel(tiposInstrumento.nombreCampos(), 0);
-        tablaTiposInstruemento.setModel(model);
-    }
-
-    private void initTableINS() {
-      modelINS = new DefaultTableModel(instrumentos.nombreInstrumentos(),0);
-      tableInstrumentos.setModel(modelINS);
-    }
+    private TiposInstrumento tiposInstrumento;
+    private Instrumento instrumentos;
+    private Calibraciones calibraciones;
+    private DefaultTableModel model = new DefaultTableModel();
+    private DefaultTableModel modelINS = new DefaultTableModel();
+    //---------------------FINAL de las declaraciones de vriables
     private void refrescarInstrumentos(){
         modelINS.setRowCount(0);
         for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
@@ -87,13 +80,6 @@ public class HELLO extends JFrame{
                 modelINS.addRow(fila);
             }
         }
-    }
-
-    public void refrescarTabla() {
-        tablaTiposInstruemento.setModel(model);
-    }
-    public void refrescarTablaInstrumentos(){
-        tableInstrumentos.setModel(modelINS);
     }
     public HELLO(){
 
@@ -142,9 +128,9 @@ public class HELLO extends JFrame{
         limpiarButtonTIPINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                txtCodigoTIPINS.setText(" ");
-                txtUnidadTIPINS.setText(" ");
-                txtNombreTIPINS.setText(" ");
+                txtCodigoTIPINS.setText("");
+                txtUnidadTIPINS.setText("");
+                txtNombreTIPINS.setText("");
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
         });
@@ -269,7 +255,7 @@ public class HELLO extends JFrame{
                         Instrumento a =  cjntInstrumentos.recuperar(i);
                         cjntInstrumentos.remover(a);
                         modeloTablaTipoInstrumentos.fireTableDataChanged();
-                        JOptionPane.showMessageDialog(null, "Tipo de instrumento eliminado exitosamente.");
+                        JOptionPane.showMessageDialog(null, "Instrumento eliminado exitosamente.");
                         refrescarInstrumentos(); // actualiza la tabla
                         txtSerieINS.setText("");
                         txtDescripcionINS.setText("");  // una vez boorado el elemento se limpian los textField
@@ -400,18 +386,20 @@ public class HELLO extends JFrame{
                 }
             }
         });
+        buscarButtonCALI.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // por hacer---
+            }
+        });
     }
-
+    
+//-------------------------------------------------------------------MAIN
     public static void main(String[] args) {
         HELLO hi = new HELLO();
         hi.setContentPane(hi.panelPrincipal);
         hi.setTitle("SILAB: Sistema de laboratorio Industrial");
         hi.setSize(900,400);
-
-        hi.initTable();
-        hi.initTableINS();
-
-
         hi.setLocationRelativeTo(null);
         hi.setVisible(true);
         hi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
