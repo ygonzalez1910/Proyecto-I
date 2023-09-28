@@ -68,14 +68,13 @@ public class Instrumento {
 
     @Override
     public String toString() {
-        return "Instrumento{" +
+        return "Instrumento" +
                 "\n  Serie: '" + serie + '\'' +
                 "\n  Descripción: '" + descripcion + '\'' +
                 "\n  Mínimo: " + minimo +
                 "\n  Máximo: " + maximo +
                 "\n  Tolerancia: " + tolerancia +
-                "\n  Tipo: '" + tipo + '\'' +
-                "\n}";
+                "\n  Tipo: '" + tipo + '\'';
     }
 
 

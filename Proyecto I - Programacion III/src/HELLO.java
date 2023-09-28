@@ -305,8 +305,18 @@ public class HELLO extends JFrame{
         buscarButtonINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String referenciaDescripcion = txtDescripcionINS.getText();
-                JOptionPane.showMessageDialog(panelPrincipal,cjntInstrumentos.buscar(referenciaDescripcion));
+                instrumentos = null;
+                String referenciaDescripcion = txtBusquedaDescripcionINS.getText();
+                for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
+                    if (Objects.equals(cjntInstrumentos.recuperar(i).getDescripcion(), referenciaDescripcion)) {
+                        instrumentos = cjntInstrumentos.recuperar(i);
+                    }
+                }
+                if(instrumentos != null) {
+                    JOptionPane.showMessageDialog(null, instrumentos.toString());
+                }else{
+                    JOptionPane.showMessageDialog(null, "No se encontro el instrumento");
+                }
             }
         });
         comboBoxTipoINS.addActionListener(new ActionListener() {
