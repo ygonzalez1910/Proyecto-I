@@ -17,11 +17,12 @@ public class TiposInstrumento {
     @Override
     public String toString() {
         return "TiposInstrumento{" +
-                "codigo='" + codigo + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", unidad='" + unidad + '\'' +
-                '}';
+                "\n  Código: '" + codigo + '\'' +
+                "\n  Nombre: '" + nombre + '\'' +
+                "\n  Unidad: '" + unidad + '\'' +
+                "\n}";
     }
+
     public String getNodeName() {
         return DESCRIPCION_XML;
     }

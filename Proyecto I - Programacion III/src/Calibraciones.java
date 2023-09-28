@@ -12,11 +12,11 @@ public class Calibraciones {
     @Override
     public String toString() {
         return "Calibraciones{" +
-                "numeroCalibracion=" + numeroCalibracion +
-                ", numeroBusqueda=" + numeroBusqueda +
-                ", fecha='" + fecha + '\'' +
-                ", mediciones=" + mediciones +
-                '}';
+                "\n  Número de Calibración: " + numeroCalibracion +
+                "\n  Número de Búsqueda: " + numeroBusqueda +
+                "\n  Fecha: '" + fecha + '\'' +
+                "\n  Mediciones: " + mediciones +
+                "\n}";
     }
 
     public double getNumeroCalibracion() {

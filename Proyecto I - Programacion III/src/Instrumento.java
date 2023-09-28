@@ -69,14 +69,15 @@ public class Instrumento {
     @Override
     public String toString() {
         return "Instrumento{" +
-                "serie='" + serie + '\'' +
-                ", descipcion='" + descripcion + '\'' +
-                ", minimo=" + minimo +
-                ", maximo=" + maximo +
-                ", tolerancia=" + tolerancia +
-                ", tipo='" + tipo + '\'' +
-                '}';
+                "\n  Serie: '" + serie + '\'' +
+                "\n  Descripción: '" + descripcion + '\'' +
+                "\n  Mínimo: " + minimo +
+                "\n  Máximo: " + maximo +
+                "\n  Tolerancia: " + tolerancia +
+                "\n  Tipo: '" + tipo + '\'' +
+                "\n}";
     }
+
 
     private static final String[] NOMBRE_INSTRUMENTOS = {"Serie", "Descripcion", "Minimo", "Maximo", "Tolerancia", "Tipo"};
     private String serie;
