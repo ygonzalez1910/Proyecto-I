@@ -53,6 +53,7 @@ public class HELLO extends JFrame{
     private JPanel tablaListadoTiposINS;
     private JTextField txtNumeroTIPINS;
     private JLabel imagenUNA;   // de aca en adelante son variables de otras cosas
+    private JPanel TablaListadoCalibraciones;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
     private ConjuntoCalibraciones cjntCalibraciones;
@@ -100,6 +101,16 @@ public class HELLO extends JFrame{
         tablaListadoINS.setLayout(new BorderLayout());
         tablaListadoINS.add(header, BorderLayout.NORTH);
         tablaListadoINS.add(new JScrollPane(tableInstrumentos), BorderLayout.CENTER);
+
+        //inicializacion tabla calaibraciones
+        cjntCalibraciones = new ConjuntoCalibraciones();
+        modeloTablaCalibraciones = new ModeloTablaCalibraciones(cjntCalibraciones);
+        tableCalibraciones.setModel(modeloTablaCalibraciones);
+        JTableHeader headerCalibraciones = tableCalibraciones.getTableHeader();
+        TablaListadoCalibraciones.setLayout(new BorderLayout());
+        TablaListadoCalibraciones.add(headerCalibraciones,BorderLayout.NORTH);
+        TablaListadoCalibraciones.add(new JScrollPane(tableCalibraciones),BorderLayout.CENTER);
+
 
     //------------------------------------------------------Botones del Panel TIPOS de INSTRUMENTOS (...TIPINS)
         guardarButtonTIPINS.addActionListener(new ActionListener() {
