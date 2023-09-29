@@ -1,13 +1,17 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.util.Objects;
+import java.time.LocalDate;
 
 //Las variables terminadas en "...TIPINS" corresponden al panel de Tipos de Instrumentos
 //Las variables terminadas en "...INS" corresponden al panel de Instrumentos
@@ -37,7 +41,6 @@ public class HELLO extends JFrame{
     private JTextField txtNumeroCALI;
     private JTextField txtMedicionesCALI;
     private JTextField txtFechaCALI;
-    private JLabel infoCalib;
     private JButton reporteButtonCALI;
     private JTable tableCalibraciones;
     private JButton guardarButtonTIPINS;    // de aca en adelante son las variables relacionadas a Tipos de Intrumentos (...TIPINS)
@@ -54,6 +57,8 @@ public class HELLO extends JFrame{
     private JTextField txtNumeroTIPINS;
     private JLabel imagenUNA;   // de aca en adelante son variables de otras cosas
     private JPanel TablaListadoCalibraciones;
+    private JTable table1;
+    private JTextField txtInstrumentoCALI;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
     private ConjuntoCalibraciones cjntCalibraciones;
@@ -66,6 +71,8 @@ public class HELLO extends JFrame{
     private DefaultTableModel model = new DefaultTableModel();
     private DefaultTableModel modelINS = new DefaultTableModel();
     //---------------------FINAL de las declaraciones de vriables
+
+    private LocalDate FechaActual = LocalDate.now();
     private void refrescarInstrumentos(){
         modelINS.setRowCount(0);
         for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
@@ -207,6 +214,8 @@ public class HELLO extends JFrame{
         });
 
     //------------------------------------------------------Botones del Panel de INSTRUMENTOS (...INS)
+
+        comboBoxTipoINS.setModel(new DefaultComboBoxModel<>(new String[]{"Seleccione un tipo"}));
         guardarButtonINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -327,15 +336,17 @@ public class HELLO extends JFrame{
         });
 
     //------------------------------------------------------Botones del Panel de CALIBRACIONES (...CALI)
+        txtFechaCALI.setText(String.valueOf(FechaActual));
         guardarButtonCALI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double txtNumero = Double.parseDouble(txtNumeroCALI.getText());
-                String txtFecha = txtFechaCALI.getText();
+                int a = 1;
+                String txtFecha = String.valueOf(FechaActual);
                 int txtMediciones = Integer.parseInt(txtMedicionesCALI.getText());
-                Calibraciones calibracion = new Calibraciones(txtNumero,txtFecha,txtMediciones);
+                Calibraciones calibracion = new Calibraciones(a,txtFecha,txtMediciones);
                 cjntCalibraciones.agregar(calibracion);
                 model.setRowCount(0);
+                a++;
                 for(int i = 0; i < cjntCalibraciones.numCalibraciones();i++){
                     Object [] fila={
                             cjntCalibraciones.recuperar(i).getNumeroCalibracion(),
@@ -353,7 +364,6 @@ public class HELLO extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 txtNumeroCALI.setText("");
-                txtFechaCALI.setText("");
                 txtMedicionesCALI.setText("");
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
@@ -414,6 +424,54 @@ public class HELLO extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 int referenciaNumero = Integer.parseInt(txtBusquedaNumeroCALI.getText());
                 JOptionPane.showMessageDialog(panelPrincipal,cjntCalibraciones.buscar(referenciaNumero));
+            }
+        });
+        tableInstrumentos.addComponentListener(new ComponentAdapter() {
+        });
+
+        //Seleccion de Instrumento en la Tabla
+        tableInstrumentos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int filaSeleccionada = tableInstrumentos.getSelectedRow();
+                if (filaSeleccionada >= 0) {
+
+                    // Obtener la información del instrumento seleccionado
+                    String serie = tableInstrumentos.getValueAt(filaSeleccionada, 0).toString();
+                    //ConjuntoTipos tipoS = tableInstrumentos.getValueAt(filaSeleccionada, 1).toString();
+                    String descripcion = tableInstrumentos.getValueAt(filaSeleccionada, 2).toString();
+                    int min = Integer.parseInt(tableInstrumentos.getValueAt(filaSeleccionada, 3).toString());
+                    int max = Integer.parseInt(tableInstrumentos.getValueAt(filaSeleccionada, 4).toString());
+                    int tolerancia = Integer.parseInt(tableInstrumentos.getValueAt(filaSeleccionada, 5).toString());
+
+
+                    // Actualizar los campos de texto
+
+                    txtSerieINS.setText(serie);
+                    txtDescripcionINS.setText(descripcion);
+                    txtMinimoINS.setText(String.valueOf(min));
+                    txtMaximoINS.setText(String.valueOf(max));
+                    txtToleranciaINS.setText(String.valueOf(tolerancia));
+
+                    txtInstrumentoCALI.setText(serie +" - "+ descripcion +" ("+ min +" - "+ max +" | "+ tolerancia +")");
+
+                    int a = 0;
+                    txtNumeroCALI.setText(String.valueOf(a));
+                    // Deshabilitar el botón de limpiar
+                    limpiarButtonINS.setEnabled(false);
+                    // Habilitar el botón de borrar
+                    borrarButtonINS.setEnabled(true);
+
+                }
+            }
+        });
+
+        tableCalibraciones.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+
+
+
             }
         });
     }
