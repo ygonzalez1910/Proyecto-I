@@ -1,7 +1,6 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 public class Mediciones {
-
     private int medida;
     private float referencia;
     private double lectura;
@@ -9,6 +8,10 @@ public class Mediciones {
         this.medida = medida;
         this.referencia = referencia; //hacer la referencia automaticamente
         this.lectura = lectura;
+    }
+
+    public Mediciones(int medida) {
+        this.medida = medida;
     }
 
     public int getMedida() {

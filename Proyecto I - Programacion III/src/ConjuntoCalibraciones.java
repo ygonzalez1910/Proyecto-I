@@ -7,10 +7,11 @@ public class ConjuntoCalibraciones {
 
     }
 
-    public void agregarCalibracion(int numeroMediciones, String fecha, int mediciones){
-        Calibraciones nuevaCalibracion = new Calibraciones(numeroMediciones,fecha,mediciones);
+    public void agregarCalibracion(int numeroCalibracion, String fecha, int cantMediciones) {
+        Calibraciones nuevaCalibracion = new Calibraciones(numeroCalibracion, fecha, cantMediciones);
         agregar(nuevaCalibracion);
     }
+
     public int numCalibraciones(){
         return calibraciones.size();
     }
@@ -25,9 +26,9 @@ public class ConjuntoCalibraciones {
         }
         return "La calibracion no fue encontrada...";
     }
-    public void borrar(Double numeroMediciones, String fecha, int mediciones){
+    public void borrar(int noCalibraciones, String fecha, int mediciones){
         for(int i = 0; calibraciones.size() > i; i++) {
-            if(calibraciones.get(i).getCantMediciones() == numeroMediciones && calibraciones.get(i).getFecha().equals(fecha) && calibraciones.get(i).getCantMediciones() == mediciones) {
+            if(calibraciones.get(i).getCantMediciones() == noCalibraciones && calibraciones.get(i).getFecha().equals(fecha) && calibraciones.get(i).getCantMediciones() == mediciones) {
                 calibraciones.remove(i);
             }
         }
@@ -35,5 +36,11 @@ public class ConjuntoCalibraciones {
     public void agregar(Calibraciones nuevaCalibracion){
         calibraciones.add(nuevaCalibracion);
     }
+    private ConjuntoCalibraciones obtenerConjuntoCalibraciones() {
+        ConjuntoCalibraciones conjuntoCalibraciones = new ConjuntoCalibraciones();
+        conjuntoCalibraciones.agregarCalibracion(calibracion.getNumeroCalibracion(), calibracion.getFecha(), calibracion.getCantMediciones());
+        return conjuntoCalibraciones;
+    }
+    private Calibraciones calibracion;
     private ArrayList<Calibraciones> calibraciones;
 }

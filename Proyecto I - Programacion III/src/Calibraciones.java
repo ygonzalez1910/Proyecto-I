@@ -14,11 +14,11 @@ public class Calibraciones {
         this.mediciones = mediciones;
     }
 
-    public Calibraciones(int numeroCalibracion, String fecha, int mediciones) {
+    public Calibraciones(int numeroCalibracion, String fecha, int cantMediciones) {
         this.numeroCalibracion = numeroCalibracion;
         this.numeroBusqueda = numeroBusqueda;
         this.fecha = fecha;
-        this.cantMediciones = mediciones;
+        this.cantMediciones = cantMediciones;
         this.mediciones = new ConjuntoMediciones();
     }
 
@@ -81,13 +81,12 @@ public class Calibraciones {
     }
 
     public Object[] toArray(){
-    Object[] r = new Object[4];
-    r[0] = numeroCalibracion;
-    r[1] = fecha;
-    r[2] = mediciones;
-    r[3] = numeroBusqueda;
-    return r;
-}
+        Object[] r = new Object[3];
+        r[0] = numeroCalibracion;
+        r[1] = fecha;
+        r[2] = mediciones;
+        return r;
+    }
 
     public void crearMediciones(int n,int maximo, int minimo){
         for(int i = 0; i<n;i++){

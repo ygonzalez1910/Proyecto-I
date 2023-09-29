@@ -41,8 +41,8 @@ public class HELLO extends JFrame{
     private JButton buscarButtonCALI;
     private JTextField txtBusquedaNumeroCALI;
     private JTextField txtNumeroCALI;
-    private JTextField txtMedicionesCALI;
     private JTextField txtFechaCALI;
+    private JTextField txtMedicionesCALI;
     private JButton reporteButtonCALI;
     private JTable tableCalibraciones;
     private JButton guardarButtonTIPINS;    // de aca en adelante son las variables relacionadas a Tipos de Intrumentos (...TIPINS)
@@ -77,6 +77,7 @@ public class HELLO extends JFrame{
     private DefaultTableModel modelINS = new DefaultTableModel();
     //---------------------FINAL de las declaraciones de vriables
     private LocalDate FechaActual = LocalDate.now();
+    private Mediciones mediciones;
     private void refrescarInstrumentos(){
         modelINS.setRowCount(0);
         for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
@@ -363,16 +364,15 @@ public class HELLO extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String txtFecha = String.valueOf(FechaActual);
-                int txtMediciones = Integer.parseInt(txtMedicionesCALI.getText());
-                int txtNum = Integer.parseInt(txtNumeroCALI.getText());
-
-                Calibraciones calibracion = new Calibraciones(txtNum,txtFecha,txtMediciones);
-
+                int referenciaNoCalibraciones = Integer.parseInt(txtNumeroCALI.getText());
+                String referenciaFecha = txtFechaCALI.getText();
+                int referenciaMediciones = Integer.parseInt(txtMedicionesCALI.getText());
+                Calibraciones calibracion = new Calibraciones(referenciaNoCalibraciones, referenciaFecha, referenciaMediciones);
                 cjntCalibraciones.agregar(calibracion);
                 model.setRowCount(0);
                 a++;
                 for(int i = 0; i < cjntCalibraciones.numCalibraciones();i++){
+                    Calibraciones cal = cjntCalibraciones.recuperar(i);
                     Object [] fila={
                             cjntCalibraciones.recuperar(i).getNumeroCalibracion(),
                             cjntCalibraciones.recuperar(i).getFecha(),
@@ -403,7 +403,7 @@ public class HELLO extends JFrame{
         borrarButtonCALI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Double referenciaNoMediciones = Double.parseDouble(txtMedicionesCALI.getText());
+                int referenciaNoMediciones = Integer.parseInt(txtMedicionesCALI.getText());
                 String referenciaFecha = txtFechaCALI.getText();
                 int referenciaMediciones = Integer.parseInt(txtMedicionesCALI.getText());
 
@@ -468,7 +468,6 @@ public class HELLO extends JFrame{
                 int filaSeleccionada = tableInstrumentos.getSelectedRow();
                 txtFechaCALI.setText(String.valueOf(FechaActual));
                 if (filaSeleccionada >= 0) {
-
                     // Obtener la información del instrumento seleccionado
                     String serie = tableInstrumentos.getValueAt(filaSeleccionada, 0).toString();
                     //ConjuntoTipos tipoS = tableInstrumentos.getValueAt(filaSeleccionada, 1).toString();
@@ -476,19 +475,13 @@ public class HELLO extends JFrame{
                     int min = Integer.parseInt(tableInstrumentos.getValueAt(filaSeleccionada, 3).toString());
                     int max = Integer.parseInt(tableInstrumentos.getValueAt(filaSeleccionada, 4).toString());
                     int tolerancia = Integer.parseInt(tableInstrumentos.getValueAt(filaSeleccionada, 5).toString());
-
-
                     // Actualizar los campos de texto
-
                     txtSerieINS.setText(serie);
                     txtDescripcionINS.setText(descripcion);
                     txtMinimoINS.setText(String.valueOf(min));
                     txtMaximoINS.setText(String.valueOf(max));
                     txtToleranciaINS.setText(String.valueOf(tolerancia));
-
                     txtInstrumentoCALI.setText(serie +" - "+ descripcion +" ("+ min +" - "+ max +" | "+ tolerancia +")");
-
-
                     txtNumeroCALI.setText(String.valueOf(b));
                     b++;
                     // Deshabilitar el botón de limpiar
@@ -500,16 +493,38 @@ public class HELLO extends JFrame{
             }
         });
 
+        // Paso 1: Debes tener una referencia a tu conjunto de calibraciones
+
+
+// Paso 2: Agregar ListSelectionListener a tableCalibraciones
         tableCalibraciones.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                int filaSeleccionada = tableInstrumentos.getSelectedRow();
-                if(filaSeleccionada >= 0) {
+                ConjuntoCalibraciones conjuntoCalibraciones = new ConjuntoCalibraciones();
+                if (!e.getValueIsAdjusting()) {
+                    int filaSeleccionada = tableCalibraciones.getSelectedRow();
+                    if (filaSeleccionada >= 0) {
+                        int cantMediciones = Integer.parseInt(tableCalibraciones.getValueAt(filaSeleccionada,2).toString());
+                        Calibraciones calibracionSeleccionada = conjuntoCalibraciones.recuperar(filaSeleccionada);
 
+                        DefaultTableModel modeloTablaMediciones = (DefaultTableModel) tableMediciones.getModel();
+                        modeloTablaMediciones.setRowCount(0);
 
+                        ConjuntoMediciones mediciones = calibracionSeleccionada.getMediciones();
+                        for (int i = 0; i < cantMediciones; i++) {
+                            Mediciones medicion = mediciones.recuperar(i);
+                            modeloTablaMediciones.addRow(new Object[]{
+                                    medicion.getMedida(),
+                                    medicion.getReferencia(),
+                                    medicion.getLectura()
+                            });
+                        }
+                    }
                 }
-
             }
+        });
+
+        tableCalibraciones.addComponentListener(new ComponentAdapter() {
         });
     }
     
