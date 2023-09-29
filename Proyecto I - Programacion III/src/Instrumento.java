@@ -9,6 +9,15 @@ public class Instrumento {
         this.maximo = maximo;
         this.tolerancia = tolerancia;
         this.tipo = tipo;
+        this.caliInstrumento = new ConjuntoCalibraciones();
+    }
+
+    public ConjuntoCalibraciones getCaliInstrumento() {
+        return caliInstrumento;
+    }
+
+    public void setCaliInstrumento(ConjuntoCalibraciones caliInstrumento) {
+        this.caliInstrumento = caliInstrumento;
     }
 
     public String getSerie() {
@@ -42,6 +51,7 @@ public class Instrumento {
         r[3] = maximo;
         r[4] = tolerancia;
         r[5] = tipo;
+        r[6] = caliInstrumento;
         return r;
     }
     public Node toXML(Document doc) {
@@ -86,4 +96,5 @@ public class Instrumento {
     private int maximo;
     private int tolerancia;
     private String tipo;
+    private ConjuntoCalibraciones caliInstrumento;
 }

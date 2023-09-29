@@ -17,7 +17,9 @@ import java.time.LocalDate;
 //Las variables terminadas en "...INS" corresponden al panel de Instrumentos
 //Las variables terminadas en "...CALI" corresponden al panel de Calibraciones
 public class HELLO extends JFrame{
-   private JPanel panelPrincipal;
+    private int a = 0;
+    private int b = 0;
+    private JPanel panelPrincipal;
     private JTabbedPane tablaInstrumentosINS;
     private JButton guardarButtonINS; // de aca en adelante son las variables relacionadas a Intrumentos (...INS)
     private JTextField txtSerieINS;
@@ -57,21 +59,23 @@ public class HELLO extends JFrame{
     private JTextField txtNumeroTIPINS;
     private JLabel imagenUNA;   // de aca en adelante son variables de otras cosas
     private JPanel TablaListadoCalibraciones;
-    private JTable table1;
+    private JTable tableMediciones;
     private JTextField txtInstrumentoCALI;
+    private JPanel TablaListadoMediciones;
     private ConjuntoTiposInstrumento cjntTiposInsrumentos;
     private ConjuntoInstrumentos cjntInstrumentos;
     private ConjuntoCalibraciones cjntCalibraciones;
+    private ConjuntoMediciones cjntMediciones;
     private ModeloTablaTipoInstrumentos modeloTablaTipoInstrumentos;
     private ModeloTablaCalibraciones modeloTablaCalibraciones;
     private ModeloTablaInstrumentos modeloTablaInstrumentos;
+    private ModeloTablaMediciones modeloTablaMediciones;
     private TiposInstrumento tiposInstrumento;
     private Instrumento instrumentos;
     private Calibraciones calibraciones;
     private DefaultTableModel model = new DefaultTableModel();
     private DefaultTableModel modelINS = new DefaultTableModel();
     //---------------------FINAL de las declaraciones de vriables
-
     private LocalDate FechaActual = LocalDate.now();
     private void refrescarInstrumentos(){
         modelINS.setRowCount(0);
@@ -89,6 +93,8 @@ public class HELLO extends JFrame{
             }
         }
     }
+
+
     public HELLO(){
 
     //Inicializamos la tabla de TIPOS de INSTRUMENTOS (...TIPINS)
@@ -117,6 +123,15 @@ public class HELLO extends JFrame{
         TablaListadoCalibraciones.setLayout(new BorderLayout());
         TablaListadoCalibraciones.add(headerCalibraciones,BorderLayout.NORTH);
         TablaListadoCalibraciones.add(new JScrollPane(tableCalibraciones),BorderLayout.CENTER);
+
+        //Inicializamos tabla mediciones
+        cjntMediciones = new ConjuntoMediciones();
+        modeloTablaMediciones = new ModeloTablaMediciones(cjntMediciones);
+        tableMediciones.setModel(modeloTablaMediciones);
+        JTableHeader headerMediciones = tableMediciones.getTableHeader();
+        TablaListadoMediciones.setLayout(new BorderLayout());
+        TablaListadoMediciones.add(headerMediciones,BorderLayout.NORTH);
+        TablaListadoMediciones.add(new JScrollPane(tableMediciones),BorderLayout.CENTER);
 
 
     //------------------------------------------------------Botones del Panel TIPOS de INSTRUMENTOS (...TIPINS)
@@ -227,6 +242,9 @@ public class HELLO extends JFrame{
                 String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
 
                 Instrumento nuevoInstrumento = new Instrumento(txtSerie, txtDescripcion, txtMinimo, txtMaximo, txtTolerancia, txtTipo);
+
+                nuevoInstrumento.getCaliInstrumento().agregarCalibracion(0,String.valueOf(FechaActual),a);
+
                 cjntInstrumentos.agregar(nuevoInstrumento);
 
                 refrescarInstrumentos();
@@ -265,6 +283,8 @@ public class HELLO extends JFrame{
                 int txtTolerancia = Integer.parseInt(txtToleranciaINS.getText());
                 String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
 
+
+
                 for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
                     if (Objects.equals(cjntInstrumentos.recuperar(i).getSerie(), txtSerie) &&
                             Objects.equals(cjntInstrumentos.recuperar(i).getDescripcion(), txtDescripcion) &&
@@ -274,7 +294,9 @@ public class HELLO extends JFrame{
                             Objects.equals(cjntInstrumentos.recuperar(i).getTipo(), txtTipo)) {
                         Instrumento a =  cjntInstrumentos.recuperar(i);
                         cjntInstrumentos.remover(a);
+
                         modeloTablaTipoInstrumentos.fireTableDataChanged();
+
                         JOptionPane.showMessageDialog(null, "Instrumento eliminado exitosamente.");
                         refrescarInstrumentos(); // actualiza la tabla
                         txtSerieINS.setText("");
@@ -336,14 +358,17 @@ public class HELLO extends JFrame{
         });
 
     //------------------------------------------------------Botones del Panel de CALIBRACIONES (...CALI)
-        txtFechaCALI.setText(String.valueOf(FechaActual));
+
         guardarButtonCALI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int a = 1;
+
                 String txtFecha = String.valueOf(FechaActual);
                 int txtMediciones = Integer.parseInt(txtMedicionesCALI.getText());
-                Calibraciones calibracion = new Calibraciones(a,txtFecha,txtMediciones);
+                int txtNum = Integer.parseInt(txtNumeroCALI.getText());
+
+                Calibraciones calibracion = new Calibraciones(txtNum,txtFecha,txtMediciones);
+
                 cjntCalibraciones.agregar(calibracion);
                 model.setRowCount(0);
                 a++;
@@ -365,6 +390,13 @@ public class HELLO extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 txtNumeroCALI.setText("");
                 txtMedicionesCALI.setText("");
+                txtInstrumentoCALI.setText("");
+                txtFechaCALI.setText("");
+                tableInstrumentos.clearSelection();
+                tableCalibraciones.clearSelection();
+                txtFechaCALI.setText("");
+
+
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
         });
@@ -382,7 +414,7 @@ public class HELLO extends JFrame{
                     Calibraciones calibracion = cjntCalibraciones.recuperar(i); // Obtener la calibración actual
                     if (calibracion.getNumeroCalibracion() == referenciaNoMediciones
                             && calibracion.getFecha().equals(referenciaFecha) // Usar equals para comparar cadenas
-                            && calibracion.getMediciones() == referenciaMediciones) {
+                            && calibracion.getCantMediciones() == referenciaMediciones) {
                         Object[] fila = {
                                 calibracion.getNumeroCalibracion(),
                                 calibracion.getFecha(),
@@ -434,6 +466,7 @@ public class HELLO extends JFrame{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int filaSeleccionada = tableInstrumentos.getSelectedRow();
+                txtFechaCALI.setText(String.valueOf(FechaActual));
                 if (filaSeleccionada >= 0) {
 
                     // Obtener la información del instrumento seleccionado
@@ -455,10 +488,11 @@ public class HELLO extends JFrame{
 
                     txtInstrumentoCALI.setText(serie +" - "+ descripcion +" ("+ min +" - "+ max +" | "+ tolerancia +")");
 
-                    int a = 0;
-                    txtNumeroCALI.setText(String.valueOf(a));
+
+                    txtNumeroCALI.setText(String.valueOf(b));
+                    b++;
                     // Deshabilitar el botón de limpiar
-                    limpiarButtonINS.setEnabled(false);
+                    //limpiarButtonINS.setEnabled(false);
                     // Habilitar el botón de borrar
                     borrarButtonINS.setEnabled(true);
 
@@ -469,19 +503,22 @@ public class HELLO extends JFrame{
         tableCalibraciones.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+                int filaSeleccionada = tableInstrumentos.getSelectedRow();
+                if(filaSeleccionada >= 0) {
 
 
+                }
 
             }
         });
     }
     
-//-------------------------------------------------------------------MAIN
+//-------------------------------------------------------------------MAIN-----------------------------------------------------
     public static void main(String[] args) {
         HELLO hi = new HELLO();
         hi.setContentPane(hi.panelPrincipal);
         hi.setTitle("SILAB: Sistema de laboratorio Industrial");
-        hi.setSize(900,400);
+        hi.setSize(1000,800);
         hi.setLocationRelativeTo(null);
         hi.setVisible(true);
         hi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

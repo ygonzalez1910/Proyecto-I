@@ -2,11 +2,24 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class Calibraciones {
-    public Calibraciones(double numeroCalibracion, String fecha, int mediciones) {
+    public int getCantMediciones() {
+        return cantMediciones;
+    }
+
+    public void setCantMediciones(int cantMediciones) {
+        this.cantMediciones = cantMediciones;
+    }
+
+    public void setMediciones(ConjuntoMediciones mediciones) {
+        this.mediciones = mediciones;
+    }
+
+    public Calibraciones(int numeroCalibracion, String fecha, int mediciones) {
         this.numeroCalibracion = numeroCalibracion;
         this.numeroBusqueda = numeroBusqueda;
         this.fecha = fecha;
-        this.mediciones = mediciones;
+        this.cantMediciones = mediciones;
+        this.mediciones = new ConjuntoMediciones();
     }
 
     @Override
@@ -15,15 +28,15 @@ public class Calibraciones {
                 "\n  Número de Calibración: " + numeroCalibracion +
                 "\n  Número de Búsqueda: " + numeroBusqueda +
                 "\n  Fecha: '" + fecha + '\'' +
-                "\n  Mediciones: " + mediciones +
+                "\n  Cantidad de mediciones: " + cantMediciones +
                 "\n}";
     }
 
-    public double getNumeroCalibracion() {
+    public int getNumeroCalibracion() {
         return numeroCalibracion;
     }
 
-    public void setNumeroCalibracion(double numeroCalibracion) {
+    public void setNumeroCalibracion(int numeroCalibracion) {
         this.numeroCalibracion = numeroCalibracion;
     }
 
@@ -43,12 +56,12 @@ public class Calibraciones {
         this.fecha = fecha;
     }
 
-    public int getMediciones() {
+    public ConjuntoMediciones getMediciones() {
         return mediciones;
     }
 
     public void setMediciones(int mediciones) {
-        this.mediciones = mediciones;
+        this.cantMediciones = mediciones;
     }
     public static String[] nombreCampos() {
         return NOMBRE_CAMPOS;
@@ -75,10 +88,19 @@ public class Calibraciones {
     r[3] = numeroBusqueda;
     return r;
 }
+
+    public void crearMediciones(int n,int maximo, int minimo){
+        for(int i = 0; i<n;i++){
+            float referencia = (maximo + minimo)/n-i;
+            mediciones.agregarMediciones(i,referencia);
+        }
+    }
+
     private static final String[] NOMBRE_CAMPOS = {"Numero", "Fecha", "Mediciones"};
-    private double numeroCalibracion;
+    private int numeroCalibracion;
     private double numeroBusqueda;
     private String fecha;
-    private int mediciones;
+    private int cantMediciones;
+    private ConjuntoMediciones mediciones;
     public static final String DESCRIPCION_XML = "CALIBRACIONES";
 }

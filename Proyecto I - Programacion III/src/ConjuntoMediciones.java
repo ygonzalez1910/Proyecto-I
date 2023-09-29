@@ -7,10 +7,10 @@ public class ConjuntoMediciones {
         this.mediciones = new ArrayList<Mediciones>();
 
     }
-    public void agregarMediciones(int cantidad){
+    public void agregarMediciones(int cantidad,float referencia){
 
         for(int i = 0; i < cantidad; i++) {
-            Mediciones nuevaCalibracion = new Mediciones(i,0,0);
+            Mediciones nuevaCalibracion = new Mediciones(i,referencia,0);
             agregar(nuevaCalibracion);
         }
     }

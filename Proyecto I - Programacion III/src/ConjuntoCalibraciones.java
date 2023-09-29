@@ -7,7 +7,7 @@ public class ConjuntoCalibraciones {
 
     }
 
-    public void agregarCalibracion(Double numeroMediciones, String fecha, int mediciones){
+    public void agregarCalibracion(int numeroMediciones, String fecha, int mediciones){
         Calibraciones nuevaCalibracion = new Calibraciones(numeroMediciones,fecha,mediciones);
         agregar(nuevaCalibracion);
     }
@@ -27,7 +27,7 @@ public class ConjuntoCalibraciones {
     }
     public void borrar(Double numeroMediciones, String fecha, int mediciones){
         for(int i = 0; calibraciones.size() > i; i++) {
-            if(calibraciones.get(i).getMediciones() == numeroMediciones && calibraciones.get(i).getFecha().equals(fecha) && calibraciones.get(i).getMediciones() == mediciones) {
+            if(calibraciones.get(i).getCantMediciones() == numeroMediciones && calibraciones.get(i).getFecha().equals(fecha) && calibraciones.get(i).getCantMediciones() == mediciones) {
                 calibraciones.remove(i);
             }
         }
