@@ -122,11 +122,9 @@ public class HELLO extends JFrame{
     public HELLO(){
 // Inicializa el modelo de tabla de mediciones
         tableModelMediciones = new DefaultTableModel();
-
-// Asigna el modelo de tabla a la tabla de mediciones
         tableMediciones.setModel(tableModelMediciones);
-
-// Agrega las columnas iniciales (puedes personalizarlas según tus necesidades)
+        tableMediciones.setEnabled(false);
+        tableMediciones.setVisible(false);
 
     //Inicializamos la tabla de TIPOS de INSTRUMENTOS (...TIPINS)
         cjntTiposInsrumentos = new ConjuntoTiposInstrumento();
@@ -289,7 +287,7 @@ public class HELLO extends JFrame{
                 txtMinimoINS.setText("");
                 txtMaximoINS.setText("");
                 txtToleranciaINS.setText("");
-
+                //comboBoxTipoINS.getSelectedItem("Seleccione una opcion");
             }
 
         });
@@ -499,10 +497,10 @@ public class HELLO extends JFrame{
                     // Obtener la información del instrumento seleccionado
                     String serie = tableInstrumentos.getValueAt(filaSeleccionada, 0).toString();
                     //ConjuntoTipos tipoS = tableInstrumentos.getValueAt(filaSeleccionada, 1).toString();
-                    String descripcion = tableInstrumentos.getValueAt(filaSeleccionada, 2).toString();
-                    String min = tableInstrumentos.getValueAt(filaSeleccionada, 3).toString();
-                    String max = tableInstrumentos.getValueAt(filaSeleccionada, 4).toString();
-                    String tolerancia = tableInstrumentos.getValueAt(filaSeleccionada, 5).toString();
+                    String descripcion = tableInstrumentos.getValueAt(filaSeleccionada, 1).toString();
+                    String min = tableInstrumentos.getValueAt(filaSeleccionada, 2).toString();
+                    String max = tableInstrumentos.getValueAt(filaSeleccionada, 3).toString();
+                    String tolerancia = tableInstrumentos.getValueAt(filaSeleccionada, 4).toString();
                     // Actualizar los campos de texto
                     txtSerieINS.setText(serie);
                     txtDescripcionINS.setText(descripcion);
@@ -525,7 +523,10 @@ public class HELLO extends JFrame{
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     int selectedRow = tableCalibraciones.getSelectedRow();
+                    tableMediciones.setEnabled(true);
                     if (selectedRow >= 0) {
+                        tableMediciones.setEnabled(true);
+                        tableMediciones.setVisible(true);
                         Calibraciones calibracionSeleccionada = cjntCalibraciones.recuperar(selectedRow);
                         String referenciaFecha = String.valueOf(FechaActual);
                         int cantMediciones = Integer.parseInt(txtMedicionesCALI.getText());
@@ -543,10 +544,14 @@ public class HELLO extends JFrame{
 
                         // Restablecer el valor de txtNumeroCALI
                         txtNumeroCALI.setText(String.valueOf(noCalibracionReferencia + 1));
+                    }else{
+                        tableMediciones.setEnabled(false);
+                        tableMediciones.setVisible(false);
                     }
                 }
             }
         });
+
     }
     
 //-------------------------------------------------------------------MAIN-----------------------------------------------------

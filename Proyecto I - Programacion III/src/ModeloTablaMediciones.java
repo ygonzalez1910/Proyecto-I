@@ -60,7 +60,9 @@ public class ModeloTablaMediciones extends AbstractTableModel {
     }
 
     public void limpiarModelo() {
-        data = new Object[0][3];
+        for(int i = 0; i < cjMediciones.numMediciones(); i++){
+            data = new Object[0][3];
+        }
         fireTableDataChanged();
     }
 }
