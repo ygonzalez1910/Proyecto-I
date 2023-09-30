@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.util.Objects;
 import java.time.LocalDate;
+import java.util.List;
+
 
 //Las variables terminadas en "...TIPINS" corresponden al panel de Tipos de Instrumentos
 //Las variables terminadas en "...INS" corresponden al panel de Instrumentos
@@ -79,6 +81,22 @@ public class HELLO extends JFrame{
     //---------------------FINAL de las declaraciones de vriables
     private LocalDate FechaActual = LocalDate.now();
     private Mediciones mediciones;
+
+    private void actualizarTablaMediciones(List<Mediciones> mediciones) {
+        ModeloTablaMediciones tableModelMediciones = (ModeloTablaMediciones) tableMediciones.getModel();
+        tableModelMediciones.limpiarModelo(); // Limpiar la tabla
+
+        for (Mediciones medicion : mediciones) {
+            Object[] fila = {
+                    medicion.getMedida(),
+                    medicion.getReferencia(),
+                    medicion.getLectura()
+            };
+            tableModelMediciones.addRow(fila);
+        }
+    }
+
+
     private void refrescarInstrumentos(){
         modelINS.setRowCount(0);
         for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
@@ -403,8 +421,8 @@ public class HELLO extends JFrame{
                 tableInstrumentos.clearSelection();
                 tableCalibraciones.clearSelection();
                 txtFechaCALI.setText("");
-
-
+                tableMediciones.getRowCount();
+                modeloTablaMediciones.limpiarModelo();
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
         });
@@ -506,22 +524,23 @@ public class HELLO extends JFrame{
                 if (!e.getValueIsAdjusting()) {
                     int selectedRow = tableCalibraciones.getSelectedRow();
                     if (selectedRow >= 0) {
-
-                        // Obtén la calibración seleccionada desde tu conjunto de calibraciones
                         Calibraciones calibracionSeleccionada = cjntCalibraciones.recuperar(selectedRow);
                         String referenciaFecha = String.valueOf(FechaActual);
                         int cantMediciones = Integer.parseInt(txtMedicionesCALI.getText());
                         int noCalibracionReferencia = Integer.parseInt(txtNumeroCALI.getText());
-                        Calibraciones c = new Calibraciones(noCalibracionReferencia,referenciaFecha,cantMediciones);
-                        for (int i = 0; i < c.getCantMediciones(); i++) {
-                            c = cjntCalibraciones.recuperar(i); // Obtener la calibración actual
-                            Object[] fila = {
-                                    c.getNumeroCalibracion(),
-                                    c.getFecha(),
-                                    c.getMediciones()
-                            };
-                            tableModelMediciones.addRow(fila);
-                        }
+
+                        // Crear la calibración y las mediciones automáticamente
+                        List<Mediciones> medicionesCalibracion = Mediciones.generarMediciones(cantMediciones, 90.0);
+                        Calibraciones c = new Calibraciones(noCalibracionReferencia, referenciaFecha, cantMediciones);
+                        c.setMediciones(medicionesCalibracion);
+                        cjntCalibraciones.agregar(c);
+
+                        // Actualizar la tabla de mediciones
+                        cjntMediciones.agregarMediciones(medicionesCalibracion);
+                        actualizarTablaMediciones(cjntMediciones.getMediciones()); // Actualiza la tabla con todas las mediciones
+
+                        // Restablecer el valor de txtNumeroCALI
+                        txtNumeroCALI.setText(String.valueOf(noCalibracionReferencia + 1));
                     }
                 }
             }
@@ -529,8 +548,6 @@ public class HELLO extends JFrame{
 
 
 
-        tableCalibraciones.addComponentListener(new ComponentAdapter() {
-        });
     }
     
 //-------------------------------------------------------------------MAIN-----------------------------------------------------

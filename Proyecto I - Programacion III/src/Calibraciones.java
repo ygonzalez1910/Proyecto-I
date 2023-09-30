@@ -1,7 +1,10 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import java.util.List;
+
 public class Calibraciones {
+    private List<Mediciones> medicionesList;
     public int getCantMediciones() {
         return cantMediciones;
     }
@@ -10,9 +13,10 @@ public class Calibraciones {
         this.cantMediciones = cantMediciones;
     }
 
-    public void setMediciones(ConjuntoMediciones mediciones) {
-        this.mediciones = mediciones;
+    public void setMediciones(List<Mediciones> mediciones) {
+        this.medicionesList = mediciones;
     }
+
 
     public Calibraciones(int numeroCalibracion, String fecha, int cantMediciones) {
         this.numeroCalibracion = numeroCalibracion;
@@ -47,6 +51,7 @@ public class Calibraciones {
     public void setNumeroBusqueda(String numeroBusqueda) {
         this.numeroBusqueda = numeroBusqueda;
     }
+
 
     public String getFecha() {
         return fecha;

@@ -1,24 +1,37 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Mediciones {
     private int medida;
-    private float referencia;
+    private double referencia;
     private double lectura;
-    public Mediciones(int medida, float referencia, double lectura) {
+
+    public Mediciones() {
+        // Constructor vacío
+    }
+
+    public Mediciones(int medida, double referencia, double lectura) {
         this.medida = medida;
-        this.referencia = referencia; //hacer la referencia automaticamente
+        this.referencia = referencia;
         this.lectura = lectura;
     }
 
-    public Mediciones(int medida) {
-        this.medida = medida;
+    public static List<Mediciones> generarMediciones(int cantidadMediciones, double rangoTotal) {
+        List<Mediciones> mediciones = new ArrayList<>();
+        double paso = rangoTotal / cantidadMediciones;
+
+        for (int i = 1; i <= cantidadMediciones; i++) {
+            double referencia = paso * i;
+            Mediciones medicion = new Mediciones(i, referencia, 0); // La lectura inicial se establece en 0
+            mediciones.add(medicion);
+        }
+
+        return mediciones;
     }
-    public int generarReferencia(int cantMedicines){
-        Calibraciones calibraciones = null;
-        double referencia = 0.0;
-        referencia = (double) 90 / calibraciones.getCantMediciones();
-        return (int) referencia;
-    }
+
     public int getMedida() {
         return medida;
     }
@@ -27,11 +40,11 @@ public class Mediciones {
         this.medida = medida;
     }
 
-    public float getReferencia() {
+    public double getReferencia() {
         return referencia;
     }
 
-    public void setReferencia(float referencia) {
+    public void setReferencia(double referencia) {
         this.referencia = referencia;
     }
 
@@ -42,7 +55,6 @@ public class Mediciones {
     public void setLectura(double lectura) {
         this.lectura = lectura;
     }
-
     @Override
     public String toString() {
         return "Mediciones{" +

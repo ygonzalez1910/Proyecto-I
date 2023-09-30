@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class ConjuntoMediciones {
 
@@ -10,7 +11,7 @@ public class ConjuntoMediciones {
     public void agregarMediciones(int cantidad,float referencia){
 
         for(int i = 0; i < cantidad; i++) {
-            Mediciones nuevaCalibracion = new Mediciones(i,referencia,0);
+            Mediciones nuevaCalibracion = new Mediciones();
             agregar(nuevaCalibracion);
         }
     }
@@ -24,5 +25,13 @@ public class ConjuntoMediciones {
 
     public Mediciones recuperar(int p){
         return mediciones.get(p);
+    }
+
+    public List<Mediciones> getMediciones() {
+        return mediciones;
+    }
+
+    public void agregarMediciones(List<Mediciones> medicionesCalibracion) {
+        mediciones.addAll(medicionesCalibracion);
     }
 }

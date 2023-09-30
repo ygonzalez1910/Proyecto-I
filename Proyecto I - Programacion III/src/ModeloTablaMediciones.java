@@ -35,5 +35,10 @@ public class ModeloTablaMediciones extends AbstractTableModel {
         data = newData;
         fireTableDataChanged();
     }
-    
+    public void limpiarModelo() {
+        data = new Object[0][3];
+        fireTableDataChanged();
+    }
+
+
 }
