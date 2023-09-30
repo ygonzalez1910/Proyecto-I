@@ -19,7 +19,7 @@ public class Calibraciones {
         this.numeroBusqueda = numeroBusqueda;
         this.fecha = fecha;
         this.cantMediciones = cantMediciones;
-        this.mediciones = new ConjuntoMediciones();
+        //this.mediciones = new ConjuntoMediciones();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Calibraciones {
         Object[] r = new Object[3];
         r[0] = numeroCalibracion;
         r[1] = fecha;
-        r[2] = mediciones;
+        r[2] = cantMediciones;
         return r;
     }
 

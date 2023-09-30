@@ -472,9 +472,9 @@ public class HELLO extends JFrame{
                     String serie = tableInstrumentos.getValueAt(filaSeleccionada, 0).toString();
                     //ConjuntoTipos tipoS = tableInstrumentos.getValueAt(filaSeleccionada, 1).toString();
                     String descripcion = tableInstrumentos.getValueAt(filaSeleccionada, 2).toString();
-                    int min = Integer.parseInt(tableInstrumentos.getValueAt(filaSeleccionada, 3).toString());
-                    int max = Integer.parseInt(tableInstrumentos.getValueAt(filaSeleccionada, 4).toString());
-                    int tolerancia = Integer.parseInt(tableInstrumentos.getValueAt(filaSeleccionada, 5).toString());
+                    String min = tableInstrumentos.getValueAt(filaSeleccionada, 3).toString();
+                    String max = tableInstrumentos.getValueAt(filaSeleccionada, 4).toString();
+                    String tolerancia = tableInstrumentos.getValueAt(filaSeleccionada, 5).toString();
                     // Actualizar los campos de texto
                     txtSerieINS.setText(serie);
                     txtDescripcionINS.setText(descripcion);
@@ -506,10 +506,8 @@ public class HELLO extends JFrame{
                     if (filaSeleccionada >= 0) {
                         int cantMediciones = Integer.parseInt(tableCalibraciones.getValueAt(filaSeleccionada,2).toString());
                         Calibraciones calibracionSeleccionada = conjuntoCalibraciones.recuperar(filaSeleccionada);
-
                         DefaultTableModel modeloTablaMediciones = (DefaultTableModel) tableMediciones.getModel();
                         modeloTablaMediciones.setRowCount(0);
-
                         ConjuntoMediciones mediciones = calibracionSeleccionada.getMediciones();
                         for (int i = 0; i < cantMediciones; i++) {
                             Mediciones medicion = mediciones.recuperar(i);
