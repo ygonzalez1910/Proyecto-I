@@ -13,7 +13,12 @@ public class Mediciones {
     public Mediciones(int medida) {
         this.medida = medida;
     }
-
+    public int generarReferencia(int cantMedicines){
+        Calibraciones calibraciones = null;
+        double referencia = 0.0;
+        referencia = (double) 90 / calibraciones.getCantMediciones();
+        return (int) referencia;
+    }
     public int getMedida() {
         return medida;
     }

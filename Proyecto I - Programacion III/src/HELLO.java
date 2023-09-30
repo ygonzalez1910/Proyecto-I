@@ -75,6 +75,7 @@ public class HELLO extends JFrame{
     private Calibraciones calibraciones;
     private DefaultTableModel model = new DefaultTableModel();
     private DefaultTableModel modelINS = new DefaultTableModel();
+    private DefaultTableModel tableModelMediciones;
     //---------------------FINAL de las declaraciones de vriables
     private LocalDate FechaActual = LocalDate.now();
     private Mediciones mediciones;
@@ -97,6 +98,13 @@ public class HELLO extends JFrame{
 
 
     public HELLO(){
+// Inicializa el modelo de tabla de mediciones
+        tableModelMediciones = new DefaultTableModel();
+
+// Asigna el modelo de tabla a la tabla de mediciones
+        tableMediciones.setModel(tableModelMediciones);
+
+// Agrega las columnas iniciales (puedes personalizarlas según tus necesidades)
 
     //Inicializamos la tabla de TIPOS de INSTRUMENTOS (...TIPINS)
         cjntTiposInsrumentos = new ConjuntoTiposInstrumento();
@@ -454,7 +462,7 @@ public class HELLO extends JFrame{
         buscarButtonCALI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int referenciaNumero = Integer.parseInt(txtBusquedaNumeroCALI.getText());
+                String referenciaNumero = txtBusquedaNumeroCALI.getText();
                 JOptionPane.showMessageDialog(panelPrincipal,cjntCalibraciones.buscar(referenciaNumero));
             }
         });
@@ -492,35 +500,34 @@ public class HELLO extends JFrame{
                 }
             }
         });
-
-        // Paso 1: Debes tener una referencia a tu conjunto de calibraciones
-
-
-// Paso 2: Agregar ListSelectionListener a tableCalibraciones
         tableCalibraciones.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                ConjuntoCalibraciones conjuntoCalibraciones = new ConjuntoCalibraciones();
                 if (!e.getValueIsAdjusting()) {
-                    int filaSeleccionada = tableCalibraciones.getSelectedRow();
-                    if (filaSeleccionada >= 0) {
-                        int cantMediciones = Integer.parseInt(tableCalibraciones.getValueAt(filaSeleccionada,2).toString());
-                        Calibraciones calibracionSeleccionada = conjuntoCalibraciones.recuperar(filaSeleccionada);
-                        DefaultTableModel modeloTablaMediciones = (DefaultTableModel) tableMediciones.getModel();
-                        modeloTablaMediciones.setRowCount(0);
-                        ConjuntoMediciones mediciones = calibracionSeleccionada.getMediciones();
-                        for (int i = 0; i < cantMediciones; i++) {
-                            Mediciones medicion = mediciones.recuperar(i);
-                            modeloTablaMediciones.addRow(new Object[]{
-                                    medicion.getMedida(),
-                                    medicion.getReferencia(),
-                                    medicion.getLectura()
-                            });
+                    int selectedRow = tableCalibraciones.getSelectedRow();
+                    if (selectedRow >= 0) {
+
+                        // Obtén la calibración seleccionada desde tu conjunto de calibraciones
+                        Calibraciones calibracionSeleccionada = cjntCalibraciones.recuperar(selectedRow);
+                        String referenciaFecha = String.valueOf(FechaActual);
+                        int cantMediciones = Integer.parseInt(txtMedicionesCALI.getText());
+                        int noCalibracionReferencia = Integer.parseInt(txtNumeroCALI.getText());
+                        Calibraciones c = new Calibraciones(noCalibracionReferencia,referenciaFecha,cantMediciones);
+                        for (int i = 0; i < c.getCantMediciones(); i++) {
+                            c = cjntCalibraciones.recuperar(i); // Obtener la calibración actual
+                            Object[] fila = {
+                                    c.getNumeroCalibracion(),
+                                    c.getFecha(),
+                                    c.getMediciones()
+                            };
+                            tableModelMediciones.addRow(fila);
                         }
                     }
                 }
             }
         });
+
+
 
         tableCalibraciones.addComponentListener(new ComponentAdapter() {
         });

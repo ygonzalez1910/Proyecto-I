@@ -19,7 +19,7 @@ public class Calibraciones {
         this.numeroBusqueda = numeroBusqueda;
         this.fecha = fecha;
         this.cantMediciones = cantMediciones;
-        //this.mediciones = new ConjuntoMediciones();
+        this.mediciones = new ConjuntoMediciones();
     }
 
     @Override
@@ -40,11 +40,11 @@ public class Calibraciones {
         this.numeroCalibracion = numeroCalibracion;
     }
 
-    public double getNumeroBusqueda() {
+    public String getNumeroBusqueda() {
         return numeroBusqueda;
     }
 
-    public void setNumeroBusqueda(double numeroBusqueda) {
+    public void setNumeroBusqueda(String numeroBusqueda) {
         this.numeroBusqueda = numeroBusqueda;
     }
 
@@ -97,7 +97,7 @@ public class Calibraciones {
 
     private static final String[] NOMBRE_CAMPOS = {"Numero", "Fecha", "Mediciones"};
     private int numeroCalibracion;
-    private double numeroBusqueda;
+    private String numeroBusqueda;
     private String fecha;
     private int cantMediciones;
     private ConjuntoMediciones mediciones;

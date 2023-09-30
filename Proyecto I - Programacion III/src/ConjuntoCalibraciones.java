@@ -3,10 +3,17 @@ import java.util.ArrayList;
 public class ConjuntoCalibraciones {
 
     public ConjuntoCalibraciones(){
-        this.calibraciones = new ArrayList<Calibraciones>();
+        calibraciones = new ArrayList<Calibraciones>();
 
     }
-
+    public String mostrar(String num){
+        for(int i = 0; i < calibraciones.size(); i++){
+            if(calibraciones.get(i).getNumeroBusqueda().equals(num)){
+                return calibraciones.get(i).toString();
+            }
+        }
+        return null;
+    }
     public void agregarCalibracion(int numeroCalibracion, String fecha, int cantMediciones) {
         Calibraciones nuevaCalibracion = new Calibraciones(numeroCalibracion, fecha, cantMediciones);
         agregar(nuevaCalibracion);
@@ -18,7 +25,7 @@ public class ConjuntoCalibraciones {
     public Calibraciones recuperar(int p){
         return calibraciones.get(p);
     }
-    public String buscar(int numeroBusqueda){
+    public String buscar(String numeroBusqueda){
         for(int i = 0; i < calibraciones.size(); i++){
             if(calibraciones.get(i).getNumeroBusqueda() == numeroBusqueda){
                 return calibraciones.get(i).toString();
