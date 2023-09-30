@@ -30,7 +30,6 @@ public class Calibraciones {
     public String toString() {
         return "Calibraciones{" +
                 "\n  Número de Calibración: " + numeroCalibracion +
-                "\n  Número de Búsqueda: " + numeroBusqueda +
                 "\n  Fecha: '" + fecha + '\'' +
                 "\n  Cantidad de mediciones: " + cantMediciones +
                 "\n}";
@@ -78,10 +77,9 @@ public class Calibraciones {
     public Node toXML(Document doc) {
         //Aquí se le da el nombre de la etiqueta
         Node r = doc.createElement(getNodeName());
-        r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de calibraciones", String.valueOf(numeroCalibracion)));
+        r.appendChild(UtilidadesXML.crearNodo(doc, "NumeroDecalibraciones", String.valueOf(numeroCalibracion)));
         r.appendChild(UtilidadesXML.crearNodo(doc, "Fecha", fecha));
-        r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de mediciones", String.valueOf(mediciones)));
-        r.appendChild(UtilidadesXML.crearNodo(doc, "Numero de mediciones", " "+mediciones));
+        r.appendChild(UtilidadesXML.crearNodo(doc, "NumeroDeMediciones", String.valueOf(mediciones)));
         return r;
     }
 
@@ -93,12 +91,6 @@ public class Calibraciones {
         return r;
     }
 
-    public void crearMediciones(int n,int maximo, int minimo){
-        for(int i = 0; i<n;i++){
-            float referencia = (maximo + minimo)/n-i;
-            mediciones.agregarMediciones(i,referencia);
-        }
-    }
 
     private static final String[] NOMBRE_CAMPOS = {"Numero", "Fecha", "Mediciones"};
     private int numeroCalibracion;

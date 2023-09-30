@@ -28,7 +28,7 @@ public class TiposInstrumento {
     }
 
     public Node toXML(Document doc) {
-        //Aquí se le da el nombre de la etiqueta
+        // Aquí se le da el nombre de la etiqueta en minúsculas sin espacios
         Node r = doc.createElement(getNodeName());
         r.appendChild(UtilidadesXML.crearNodo(doc, "codigo", codigo));
         r.appendChild(UtilidadesXML.crearNodo(doc, "nombre", nombre));
@@ -36,6 +36,7 @@ public class TiposInstrumento {
 
         return r;
     }
+
     public Object[] toArray() {
         Object[] r = new Object[5];
         r[0] = codigo;
@@ -58,6 +59,6 @@ public class TiposInstrumento {
     private String nombre;
     private String unidad;
 
-    private static final String[] NOMBRE_CAMPOS = {"Código", "Nombre", "Unidad" };
-    public static final String DESCRIPCION_XML = "TIPOS DE INSTRUMENTO";
+    private static final String[] NOMBRE_CAMPOS = {"Codigo", "Nombre", "Unidad" };
+    public static final String DESCRIPCION_XML = "TIPOSDEINSTRUMENTO";
 }

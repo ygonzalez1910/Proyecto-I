@@ -7,26 +7,28 @@ import java.util.List;
 public class Mediciones {
     private int medida;
     private double referencia;
-    private double lectura;
+    private String lectura;
 
     public Mediciones() {
         // Constructor vacío
     }
 
-    public Mediciones(int medida, double referencia, double lectura) {
+    public Mediciones(int medida, double referencia, String lectura) {
         this.medida = medida;
         this.referencia = referencia;
         this.lectura = lectura;
     }
 
-    public static List<Mediciones> generarMediciones(int cantidadMediciones, double rangoTotal) {
+    public static List<Mediciones> generarMediciones(int cantidadMediciones, double total) {
         List<Mediciones> mediciones = new ArrayList<>();
-        double paso = rangoTotal / cantidadMediciones;
+
+        double paso = total / cantidadMediciones;
+        double referencia = 0.0;
 
         for (int i = 1; i <= cantidadMediciones; i++) {
-            double referencia = paso * i;
-            Mediciones medicion = new Mediciones(i, referencia, 0); // La lectura inicial se establece en 0
+            Mediciones medicion = new Mediciones(i, referencia, ""); // La lectura inicial se establece en 0
             mediciones.add(medicion);
+            referencia += paso;
         }
 
         return mediciones;
@@ -48,11 +50,11 @@ public class Mediciones {
         this.referencia = referencia;
     }
 
-    public double getLectura() {
+    public String getLectura() {
         return lectura;
     }
 
-    public void setLectura(double lectura) {
+    public void setLectura(String lectura) {
         this.lectura = lectura;
     }
     @Override

@@ -1,5 +1,6 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -9,10 +10,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.util.Objects;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 
 //Las variables terminadas en "...TIPINS" corresponden al panel de Tipos de Instrumentos
@@ -96,7 +96,6 @@ public class HELLO extends JFrame{
         }
     }
 
-
     private void refrescarInstrumentos(){
         modelINS.setRowCount(0);
         for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
@@ -113,6 +112,11 @@ public class HELLO extends JFrame{
             }
         }
     }
+    private void limpiarTablaMediciones() {
+        ModeloTablaMediciones modeloTablaMediciones = (ModeloTablaMediciones) tableMediciones.getModel();
+        modeloTablaMediciones.limpiarModelo();
+    }
+
 
 
     public HELLO(){
@@ -247,7 +251,7 @@ public class HELLO extends JFrame{
                     }
                     d.appendChild(r);
 
-                    UtilidadesXML.guardarArchivoXML(d, "tipos de instrumento.xml");
+                    UtilidadesXML.guardarArchivoXML(d, "tiposDeInstrumento.xml");
                     JOptionPane.showMessageDialog(null,"Archivo XML generado exitosamente.");
                 } catch (ParserConfigurationException ex) {
                     JOptionPane.showMessageDialog(null,"Error en el archivo XML");
@@ -261,6 +265,7 @@ public class HELLO extends JFrame{
         guardarButtonINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 String txtSerie = txtSerieINS.getText();
                 String txtDescripcion = txtDescripcionINS.getText();
                 int txtMinimo = Integer.parseInt(txtMinimoINS.getText());
@@ -310,33 +315,33 @@ public class HELLO extends JFrame{
                 int txtTolerancia = Integer.parseInt(txtToleranciaINS.getText());
                 String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
 
-
-
-                for (int i = 0; i < cjntInstrumentos.numInstrumento(); i++) {
-                    if (Objects.equals(cjntInstrumentos.recuperar(i).getSerie(), txtSerie) &&
-                            Objects.equals(cjntInstrumentos.recuperar(i).getDescripcion(), txtDescripcion) &&
-                            cjntInstrumentos.recuperar(i).getMinimo() == txtMinimo && // Usamos == para comparar ints
-                            cjntInstrumentos.recuperar(i).getMaximo() == txtMaximo && // Usamos == para comparar ints
-                            cjntInstrumentos.recuperar(i).getTolerancia() == txtTolerancia  &&
-                            Objects.equals(cjntInstrumentos.recuperar(i).getTipo(), txtTipo)) {
-                        Instrumento a =  cjntInstrumentos.recuperar(i);
-                        cjntInstrumentos.remover(a);
-
-                        modeloTablaTipoInstrumentos.fireTableDataChanged();
-
-                        JOptionPane.showMessageDialog(null, "Instrumento eliminado exitosamente.");
-                        refrescarInstrumentos(); // actualiza la tabla
-                        txtSerieINS.setText("");
-                        txtDescripcionINS.setText("");  // una vez boorado el elemento se limpian los textField
-                        txtMinimoINS.setText("");
-                        txtMaximoINS.setText("");
-                        txtToleranciaINS.setText("");
+                // Usar un bucle while para eliminar todos los instrumentos que cumplan con las condiciones
+                int i = 0;
+                while (i < cjntInstrumentos.numInstrumento()) {
+                    Instrumento instrumento = cjntInstrumentos.recuperar(i);
+                    if (instrumento.getSerie().equals(txtSerie) &&
+                            instrumento.getDescripcion().equals(txtDescripcion) &&
+                            instrumento.getMinimo() == txtMinimo &&
+                            instrumento.getMaximo() == txtMaximo &&
+                            instrumento.getTolerancia() == txtTolerancia &&
+                            instrumento.getTipo().equals(txtTipo)) {
+                        cjntInstrumentos.remover(instrumento);
+                        i--; // Retroceder un paso para verificar el siguiente elemento después de la eliminación
                     }
+                    i++;
                 }
 
+                modeloTablaTipoInstrumentos.fireTableDataChanged();
+                JOptionPane.showMessageDialog(null, "Instrumentos eliminados exitosamente.");
+                refrescarInstrumentos(); // actualiza la tabla
+                txtSerieINS.setText("");
+                txtDescripcionINS.setText("");
+                txtMinimoINS.setText("");
+                txtMaximoINS.setText("");
+                txtToleranciaINS.setText("");
             }
-
         });
+
         reporteButtonINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -421,8 +426,7 @@ public class HELLO extends JFrame{
                 tableInstrumentos.clearSelection();
                 tableCalibraciones.clearSelection();
                 txtFechaCALI.setText("");
-                tableMediciones.getRowCount();
-                modeloTablaMediciones.limpiarModelo();
+                limpiarTablaMediciones();
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
         });
@@ -480,11 +484,9 @@ public class HELLO extends JFrame{
         buscarButtonCALI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String referenciaNumero = txtBusquedaNumeroCALI.getText();
+                int referenciaNumero = Integer.parseInt(txtBusquedaNumeroCALI.getText());
                 JOptionPane.showMessageDialog(panelPrincipal,cjntCalibraciones.buscar(referenciaNumero));
             }
-        });
-        tableInstrumentos.addComponentListener(new ComponentAdapter() {
         });
 
         //Seleccion de Instrumento en la Tabla
@@ -545,9 +547,6 @@ public class HELLO extends JFrame{
                 }
             }
         });
-
-
-
     }
     
 //-------------------------------------------------------------------MAIN-----------------------------------------------------

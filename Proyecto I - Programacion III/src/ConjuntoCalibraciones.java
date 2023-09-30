@@ -25,9 +25,9 @@ public class ConjuntoCalibraciones {
     public Calibraciones recuperar(int p){
         return calibraciones.get(p);
     }
-    public String buscar(String numeroBusqueda){
+    public String buscar(int numeroBusqueda){
         for(int i = 0; i < calibraciones.size(); i++){
-            if(calibraciones.get(i).getNumeroBusqueda() == numeroBusqueda){
+            if(calibraciones.get(i).getNumeroCalibracion() == numeroBusqueda){
                 return calibraciones.get(i).toString();
             }
         }
