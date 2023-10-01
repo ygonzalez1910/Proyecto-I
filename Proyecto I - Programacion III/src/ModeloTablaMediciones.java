@@ -33,6 +33,19 @@ public class ModeloTablaMediciones extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return editableColumns[columnIndex];
     }
+    public void clearData() {
+        int rowCount = getRowCount();
+        int columnCount = getColumnCount();
+
+        for (int row = 0; row < rowCount; row++) {
+            for (int col = 0; col < columnCount; col++) {
+                data[row][col] = null; // O puedes establecerlos en valores vacíos si prefieres ""
+            }
+        }
+
+        fireTableDataChanged();
+    }
+
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {

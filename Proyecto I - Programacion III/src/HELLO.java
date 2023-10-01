@@ -433,10 +433,18 @@ public class HELLO extends JFrame{
                 tableCalibraciones.clearSelection();
                 txtFechaCALI.setText("");
                 limpiarTablaMediciones();
-                tableMediciones.getRowCount();
-                modeloTablaTipoInstrumentos.fireTableDataChanged();
+
+                // Obtén el modelo de la tablaMediciones (ModeloTablaMediciones)
+                ModeloTablaMediciones model = (ModeloTablaMediciones) tableMediciones.getModel();
+
+                // Limpia los datos del modelo personalizado
+                model.clearData();
+
+                // Notifica a la tabla que se han cambiado los datos
+                model.fireTableDataChanged();
             }
         });
+
         borrarButtonCALI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -542,7 +550,7 @@ public class HELLO extends JFrame{
                         int noCalibracionReferencia = Integer.parseInt(txtNumeroCALI.getText());
 
                         // Eliminar todas las mediciones existentes antes de agregar nuevas
-                        cjntMediciones.getMediciones().clear();
+                        //cjntMediciones.getMediciones().clear();
 
                         // Crear las mediciones automáticamente
                         List<Mediciones> medicionesCalibracion = Mediciones.generarMediciones(cantMediciones, 90.0);
