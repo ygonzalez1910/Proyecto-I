@@ -30,7 +30,9 @@ public class ConjuntoMediciones {
     public List<Mediciones> getMediciones() {
         return mediciones;
     }
-
+    public boolean isEmpty() {
+        return mediciones.isEmpty();
+    }
     public void agregarMediciones(List<Mediciones> medicionesCalibracion) {
         mediciones.addAll(medicionesCalibracion);
     }

@@ -26,13 +26,23 @@ public class Mediciones {
         double referencia = 0.0;
 
         for (int i = 1; i <= cantidadMediciones; i++) {
-            Mediciones medicion = new Mediciones(i, referencia, ""); // La lectura inicial se establece en 0
-            mediciones.add(medicion);
-            referencia += paso;
+            if (i == cantidadMediciones) {
+                // Ajustar la última medición para que la suma total sea 90 grados
+                double ultimaMedicion = 90.0 - referencia;
+                Mediciones medicion = new Mediciones(i, ultimaMedicion, "");
+                mediciones.add(medicion);
+            } else {
+                Mediciones medicion = new Mediciones(i, paso, "");
+                mediciones.add(medicion);
+                referencia += paso;
+            }
         }
 
         return mediciones;
     }
+
+
+
 
     public int getMedida() {
         return medida;
