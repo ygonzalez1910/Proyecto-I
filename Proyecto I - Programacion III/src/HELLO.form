@@ -46,7 +46,9 @@
                         <constraints>
                           <grid row="0" column="0" row-span="4" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                         </constraints>
-                        <properties/>
+                        <properties>
+                          <font name="Arial Black"/>
+                        </properties>
                         <border type="none" title="Tipo de Instrumentos"/>
                         <children>
                           <component id="e1186" class="javax.swing.JLabel">
@@ -54,6 +56,7 @@
                               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
+                              <font/>
                               <text value="Código"/>
                             </properties>
                           </component>
@@ -62,6 +65,7 @@
                               <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
+                              <font/>
                               <text value="Nombre"/>
                             </properties>
                           </component>
@@ -88,6 +92,7 @@
                               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
+                              <font/>
                               <text value="Unidad"/>
                             </properties>
                           </component>
@@ -104,6 +109,7 @@
                               <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
+                              <background color="-12065461"/>
                               <text value="Guardar"/>
                             </properties>
                           </component>
@@ -112,6 +118,8 @@
                               <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
+                              <background color="-65497"/>
+                              <foreground color="-2693671"/>
                               <text value="Borrar"/>
                             </properties>
                           </component>
@@ -120,6 +128,8 @@
                               <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
+                              <background color="-15592347"/>
+                              <foreground color="-527107"/>
                               <text value="Limpiar"/>
                             </properties>
                           </component>
@@ -164,6 +174,7 @@
                 </constraints>
                 <properties>
                   <enabled value="true"/>
+                  <foreground color="-524292"/>
                 </properties>
                 <border type="none" title="Búsqueda"/>
                 <children>
@@ -172,6 +183,8 @@
                       <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-15918800"/>
+                      <foreground color="-524292"/>
                       <text value="Buscar"/>
                     </properties>
                   </component>
@@ -198,6 +211,8 @@
                       <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-15918800"/>
+                      <foreground color="-524292"/>
                       <horizontalTextPosition value="2"/>
                       <text value="Reporte"/>
                     </properties>
@@ -263,6 +278,7 @@
                       <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-12065461"/>
                       <text value="Guardar"/>
                     </properties>
                   </component>
@@ -271,6 +287,8 @@
                       <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-15592347"/>
+                      <foreground color="-524292"/>
                       <text value="Limpiar"/>
                     </properties>
                   </component>
@@ -313,6 +331,8 @@
                       <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-1769437"/>
+                      <foreground color="-524292"/>
                       <text value="Borrar"/>
                     </properties>
                   </component>
@@ -379,6 +399,8 @@
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-15918800"/>
+                      <foreground color="-524292"/>
                       <text value="Buscar"/>
                     </properties>
                   </component>
@@ -387,6 +409,8 @@
                       <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-15918800"/>
+                      <foreground color="-524292"/>
                       <text value="Reporte"/>
                     </properties>
                   </component>
@@ -540,6 +564,8 @@
                       <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-15918800"/>
+                      <foreground color="-524292"/>
                       <text value="Buscar"/>
                     </properties>
                   </component>
@@ -564,6 +590,8 @@
                       <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-15918800"/>
+                      <foreground color="-524292"/>
                       <text value="Reporte"/>
                     </properties>
                   </component>
@@ -574,6 +602,7 @@
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-12065461"/>
                   <text value="Guardar"/>
                 </properties>
               </component>
@@ -582,6 +611,8 @@
                   <grid row="1" column="3" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-15592347"/>
+                  <foreground color="-524292"/>
                   <text value="Limpiar"/>
                 </properties>
               </component>
@@ -610,6 +641,8 @@
                   <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-65497"/>
+                  <foreground color="-524292"/>
                   <text value="Borrar"/>
                 </properties>
               </component>
