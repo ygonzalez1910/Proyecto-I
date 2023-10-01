@@ -144,6 +144,8 @@ public class HELLO extends JFrame{
         tablaListadoINS.add(header, BorderLayout.NORTH);
         tablaListadoINS.add(new JScrollPane(tableInstrumentos), BorderLayout.CENTER);
 
+        comboBoxTipoINS.setModel(new DefaultComboBoxModel<>(new String[]{"Seleccione un tipo"}));
+
         //inicializacion tabla calaibraciones
         cjntCalibraciones = new ConjuntoCalibraciones();
         modeloTablaCalibraciones = new ModeloTablaCalibraciones(cjntCalibraciones);
@@ -188,6 +190,7 @@ public class HELLO extends JFrame{
                 txtCodigoTIPINS.setText("");
                 txtNombreTIPINS.setText("");
                 txtUnidadTIPINS.setText("");
+                comboBoxTipoINS.setSelectedItem("Seleccione un tipo");
             }
         });
         limpiarButtonTIPINS.addActionListener(new ActionListener() {
@@ -196,6 +199,7 @@ public class HELLO extends JFrame{
                 txtCodigoTIPINS.setText("");
                 txtUnidadTIPINS.setText("");
                 txtNombreTIPINS.setText("");
+                comboBoxTipoINS.setSelectedItem("Seleccione un tipo");
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
             }
         });
@@ -262,7 +266,7 @@ public class HELLO extends JFrame{
 
     //------------------------------------------------------Botones del Panel de INSTRUMENTOS (...INS)
 
-        comboBoxTipoINS.setModel(new DefaultComboBoxModel<>(new String[]{"Seleccione un tipo"}));
+
         guardarButtonINS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

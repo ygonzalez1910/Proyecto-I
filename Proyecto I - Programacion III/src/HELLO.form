@@ -657,7 +657,7 @@
                                 <constraints/>
                                 <properties>
                                   <horizontalAlignment value="0"/>
-                                  <text value="Aca deberia estar la imagen"/>
+                                  <text value=""/>
                                 </properties>
                               </component>
                             </children>
