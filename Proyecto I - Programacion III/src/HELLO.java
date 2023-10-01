@@ -185,6 +185,9 @@ public class HELLO extends JFrame{
                 }
                 modeloTablaTipoInstrumentos.fireTableDataChanged();
                 JOptionPane.showMessageDialog(null, "Tipo de instrumento agregado existosamente");
+                txtCodigoTIPINS.setText("");
+                txtNombreTIPINS.setText("");
+                txtUnidadTIPINS.setText("");
             }
         });
         limpiarButtonTIPINS.addActionListener(new ActionListener() {
@@ -313,25 +316,26 @@ public class HELLO extends JFrame{
                 int txtTolerancia = Integer.parseInt(txtToleranciaINS.getText());
                 String txtTipo = (String) comboBoxTipoINS.getSelectedItem();
 
-                // Usar un bucle while para eliminar todos los instrumentos que cumplan con las condiciones
-                int i = 0;
-                while (i < cjntInstrumentos.numInstrumento()) {
-                    Instrumento instrumento = cjntInstrumentos.recuperar(i);
-                    if (instrumento.getSerie().equals(txtSerie) &&
-                            instrumento.getDescripcion().equals(txtDescripcion) &&
-                            instrumento.getMinimo() == txtMinimo &&
-                            instrumento.getMaximo() == txtMaximo &&
-                            instrumento.getTolerancia() == txtTolerancia &&
-                            instrumento.getTipo().equals(txtTipo)) {
-                        cjntInstrumentos.remover(instrumento);
-                        i--; // Retroceder un paso para verificar el siguiente elemento después de la eliminación
-                    }
-                    i++;
-                }
+                instrumentos = new Instrumento(txtSerie,txtDescripcion,txtMinimo,txtMaximo,txtTolerancia,txtTipo);
+                cjntInstrumentos.borrar(txtSerie,txtDescripcion,txtMinimo,txtMaximo,txtTolerancia,txtTipo);
 
-                modeloTablaTipoInstrumentos.fireTableDataChanged();
-                JOptionPane.showMessageDialog(null, "Instrumentos eliminados exitosamente.");
-                refrescarInstrumentos(); // actualiza la tabla
+                for(int i = 0; i < cjntInstrumentos.numInstrumento();i++){
+                    if(instrumentos.getSerie().equals(txtSerie) && instrumentos.getDescripcion().equals(txtDescripcion)
+                        && instrumentos.getMinimo() == txtMinimo && instrumentos.getMaximo() == txtMaximo
+                        && instrumentos.getTolerancia() == txtTolerancia && instrumentos.getTipo().equals(txtTipo)){
+                        Object [] fila={
+                                cjntInstrumentos.recuperar(i).getSerie(),
+                                cjntInstrumentos.recuperar(i).getDescripcion(),
+                                cjntInstrumentos.recuperar(i).getMinimo(),
+                                cjntInstrumentos.recuperar(i).getMaximo(),
+                                cjntInstrumentos.recuperar(i).getTolerancia(),
+                                cjntInstrumentos.recuperar(i).getTipo()
+                        };
+                    }
+                }
+                modeloTablaInstrumentos.fireTableDataChanged();
+                JOptionPane.showMessageDialog(null,"instrumento eliminado exitosamente.");
+
                 txtSerieINS.setText("");
                 txtDescripcionINS.setText("");
                 txtMinimoINS.setText("");
