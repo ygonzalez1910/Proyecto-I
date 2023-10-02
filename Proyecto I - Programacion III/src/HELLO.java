@@ -125,12 +125,14 @@ public class HELLO extends JFrame{
         tableMediciones.setModel(tableModelMediciones);
         tableMediciones.setEnabled(false);
         tableMediciones.setVisible(false);
+        TablaListadoMediciones.setVisible(false);
 
     //Inicializamos la tabla de TIPOS de INSTRUMENTOS (...TIPINS)
         cjntTiposInsrumentos = new ConjuntoTiposInstrumento();
         modeloTablaTipoInstrumentos = new ModeloTablaTipoInstrumentos(cjntTiposInsrumentos);
         tablaTiposInstruemento.setModel(modeloTablaTipoInstrumentos);
         JTableHeader headerTipoINS = tablaTiposInstruemento.getTableHeader();
+        //tablaListadoTipoINS es el panel donde esta tabla de tipo de instrumentos
         tablaListadoTiposINS.setLayout(new BorderLayout());
         tablaListadoTiposINS.add(headerTipoINS, BorderLayout.NORTH);
         tablaListadoTiposINS.add(new JScrollPane(tablaTiposInstruemento), BorderLayout.CENTER);
@@ -433,6 +435,7 @@ public class HELLO extends JFrame{
                 tableCalibraciones.clearSelection();
                 txtFechaCALI.setText("");
                 limpiarTablaMediciones();
+                TablaListadoMediciones.setVisible(false);
 
                 // Obtén el modelo de la tablaMediciones (ModeloTablaMediciones)
                 ModeloTablaMediciones model = (ModeloTablaMediciones) tableMediciones.getModel();
@@ -560,7 +563,8 @@ public class HELLO extends JFrame{
                         actualizarTablaMediciones(cjntMediciones.getMediciones()); // Actualiza la tabla con todas las mediciones
 
                         // Restablecer el valor de txtNumeroCALI
-                        txtNumeroCALI.setText(String.valueOf(noCalibracionReferencia + 1));
+                        //txtNumeroCALI.setText(String.valueOf(noCalibracionReferencia + 1));
+                        TablaListadoMediciones.setVisible(true);
                     } else {
                         tableMediciones.setEnabled(false);
                         tableMediciones.setVisible(false);
@@ -583,7 +587,6 @@ public class HELLO extends JFrame{
         hi.setVisible(true);
         hi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
